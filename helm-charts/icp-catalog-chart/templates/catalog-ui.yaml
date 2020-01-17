@@ -1,0 +1,150 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ .Values.catalogui.commonname }}
+  labels:
+    app: {{ .Values.catalogui.commonname  }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    component: "catalogui"
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service}}
+spec:
+  selector:
+    matchLabels:
+      app: catalog-ui
+  minReadySeconds: 0
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.catalogui.commonname  }}
+        chart: "{{ .Chart.Name }}"
+        component: "catalogui"
+        release: {{ .Release.Name }}
+        heritage: {{ .Release.Service}}
+        k8s-app: {{ .Values.catalogui.commonname }}
+      annotations:
+        seccomp.security.alpha.kubernetes.io/pod: docker/default
+    spec:
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+    {{- if .Values.catalogui.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.catalogui.nodeSelector | indent 8 }}
+    {{- end }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: beta.kubernetes.io/arch
+                  operator: In
+                  values:
+                  - amd64
+                  - ppc64le
+                  - s390x
+    {{- if .Values.catalogui.tolerations }}
+      tolerations:
+{{ toYaml .Values.catalogui.tolerations | indent 8 }}
+    {{- end }}
+      initContainers:
+        - name: check-secret
+          image: "{{ .Values.catalogui.image.repository }}:{{ .Values.catalogui.image.tag }}"
+          imagePullPolicy: {{ .Values.catalogui.pullPolicy }}
+          volumeMounts:
+            - name: check-file
+              mountPath: /check-file
+          resources:
+{{ toYaml .Values.catalogui.resources | indent 12 }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            {{- if not (.Capabilities.APIVersions.Has "security.openshift.io/v1") }}
+            runAsUser: {{ .Values.catalogui.runAsUser }}
+            {{- end }}
+            allowPrivilegeEscalation: false
+            privileged: false
+            capabilities:
+              drop:
+              - ALL
+          command:
+            - sh
+            - -c
+            - |
+              while true; do
+                ls /check-file/* && break
+                sleep 30
+              done
+      containers:
+        - image: "{{ .Values.catalogui.image.repository }}:{{ .Values.catalogui.image.tag }}"
+          imagePullPolicy: {{ .Values.catalogui.pullPolicy }}
+          name: {{ .Values.catalogui.image.name }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            privileged: false
+            capabilities:
+              drop:
+              - ALL
+          env:
+            - name: cfcRouterUrl
+              value: "{{ .Values.catalogui.env.cfcRouterUrl }}"
+            - name: catalogApiRouteUrl
+              value: "{{ .Values.catalogui.env.catalogApiRouteUrl }}"
+            - name: WLP_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  optional: true
+                  name: {{ .Values.catalogui.secretKeyRef.clientIdSecretName }}
+                  key: {{ .Values.catalogui.secretKeyRef.clientIdSecretKey }}
+            - name: WLP_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.catalogui.secretKeyRef.clientIdSecretName }}
+                  key: {{ .Values.catalogui.secretKeyRef.clientSecretSecretKey }}
+            - name: PLATFORM_IDENTITY_PROVIDER_URL
+              value: "{{ .Values.catalogui.env.platformidentityproviderurl }}"
+            - name: WLP_REDIRECT_URL
+              value: "{{ .Values.catalogui.env.wlpredirecturl }}"
+            - name: hcmUiApiUrl
+              value: "{{ .Values.catalogui.env.hcmUiApiUrl }}"
+            - name: hcmSearchApiUrl
+              value: "{{ .Values.catalogui.env.hcmSearchApiUrl }}"
+          resources:
+{{ toYaml .Values.catalogui.resources | indent 12 }}
+          {{- if .Values.catalogui.healthcheck.enabled }}
+          livenessProbe:
+            httpGet:
+              port: 4000
+              path: /catalog/livenessProbe
+              scheme: HTTP
+            failureThreshold: 9
+            initialDelaySeconds: 185
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          readinessProbe:
+            httpGet:
+              port: 4000
+              path: /catalog/readinessProbe
+              scheme: HTTP
+            failureThreshold: 9
+            initialDelaySeconds: 180
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          {{- end }}
+      volumes:
+        - name: check-file
+          secret:
+            optional: true
+            secretName: {{ .Values.catalogui.secretKeyRef.clientIdSecretName }}
