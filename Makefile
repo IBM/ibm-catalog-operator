@@ -80,13 +80,6 @@ test:
 
 
 ############################################################
-# install operator sdk section
-############################################################
-
-install-operator-sdk: 
-	@operator-sdk version 2> /dev/null ; if [ $$? -ne 0 ]; then /commonUtil/scripts/install-operator-sdk.sh; fi
-
-############################################################
 # build section
 ############################################################
 ifeq ($(BUILD_LOCALLY),0)
