@@ -87,8 +87,7 @@ ifeq ($(BUILD_LOCALLY),0)
 config-docker:
 endif
 
-build:
-	install-operator-sdk $(CONFIG_DOCKER_TARGET)
+build: install-operator-sdk $(CONFIG_DOCKER_TARGET)
 	@operator-sdk build $(REGISTRY)/$(IMG):$(VERSION)
 
 ############################################################
