@@ -88,7 +88,7 @@ config-docker:
 endif
 
 build:
-	@operator-sdk version 2> /dev/null ; if [ $$? -ne 0 ]; then @commonUtil/scripts/install-operator-sdk.sh; fi $(CONFIG_DOCKER_TARGET)
+	install-operator-sdk $(CONFIG_DOCKER_TARGET)
 	@operator-sdk build $(REGISTRY)/$(IMG):$(VERSION)
 
 ############################################################

@@ -53,4 +53,4 @@ format-python:
 format-protos:
 	@$(FINDFILES) -name '*.proto' -print0 | $(XARGS) -L 1 prototool format -w
 
-.PHONY: lint-scripts lint-helm lint-all format-python format-protos config-docker
+.PHONY: lint-scripts lint-helm lint-all format-python format-protos config-docker install-operator-sdk
