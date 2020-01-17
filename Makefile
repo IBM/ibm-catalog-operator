@@ -48,7 +48,7 @@ all: fmt check test build images
 
 
 
-include common/Makefile.common.mk
+include Common/Makefile.common.mk
 
 
 ############################################################
