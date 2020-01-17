@@ -84,7 +84,7 @@ test:
 ############################################################
 
 install-operator-sdk: 
-	@operator-sdk version 2> /dev/null ; if [ $$? -ne 0 ]; then ./common/scripts/install-operator-sdk.sh; fi
+	@operator-sdk version 2> /dev/null ; if [ $$? -ne 0 ]; then ./Common/scripts/install-operator-sdk.sh; fi
 
 ############################################################
 # build section
