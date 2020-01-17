@@ -20,7 +20,7 @@ DOCKER_REGISTRY="quay.io"
 DOCKER_USERNAME="multicloudlab"
 DOCKER_PASSWORD=$(${KUBECTL} -n default get secret quay-cred -o jsonpath='{.data.password}' | base64 --decode)
 
-# support other container tools, e.g. podman
+# support other container tools
 CONTAINER_CLI=${CONTAINER_CLI:-docker}
 
 # login the docker registry
