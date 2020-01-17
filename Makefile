@@ -25,8 +25,7 @@ REGISTRY ?= quay.io/opencloudio
 # Override this variable ue with your own value if you're working on forked repo.
 GIT_HOST ?= github.com/IBM
 
-PWD := $(shell pwd)
-BASE_DIR := $(shell basename $(PWD))
+BASE_DIR := ibm-catalog-operator
 
 TESTARGS_DEFAULT := "-v"
 export TESTARGS ?= $(TESTARGS_DEFAULT)
@@ -47,9 +46,7 @@ endif
 
 all: fmt check test build images
 
-ifneq ("$(realpath $(DEST))", "$(realpath $(PWD))")
-    $(error Please run 'make' from $(DEST). Current directory is $(PWD))
-endif
+
 
 include common/Makefile.common.mk
 
