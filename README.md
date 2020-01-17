@@ -1,2 +1,2 @@
-# ibm-catalog-operator
-Operator used to install the catalog service
+# catalog-operator
+Operator project for common services Catalog

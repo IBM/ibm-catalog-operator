@@ -1,0 +1,212 @@
+# Default values for chart2.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates
+catalogui:
+  __metadata:
+    label: "Multicloud Manager Catalog"
+    description: "Configuration for Multicloud Manager Catalog UI Service"
+  nodeSelector:
+    master:
+      __metadata:
+        label: "Node selector for management node"
+        description: "Determines if the component should be scheduled on the management node"
+        type: "string"
+        required: false
+        immutable: false
+  tolerations:
+    __metadata:
+      name: "ui.tolerations"
+      label: "Console tolerations"
+      description: "Console tolerations settings"
+      hidden: true
+  commonname:
+    __metadata:
+      label: "Common Name for Catalog"
+      description:  "Common Name for Catalog UI Service "
+      type: "string"
+      immutable: false
+      required: true
+  ingresspath:
+    __metadata:
+      label: "Catalog Ingress Path"
+      description: "Catalog UI Service Ingress Path"
+      type: "string"
+      immutable: false
+      required: true
+  pullPolicy:
+    __metadata:
+      label: "Catalog Image Pull Policy"
+      description:  " Image Pull Policy for Catalog"
+      type: "string"
+      immutable: false
+      required: true
+      options:
+      - label: "IfNotPresent"
+        value: "IfNotPresent"
+      - label: "Always"
+        value: "Always"
+      - label: "Never"
+        value: "Never"
+  image:
+    name:
+      __metadata:
+        label: "Catalog Image Name"
+        description: "Image Name for Catalog UI Service"
+        type: "string"
+        required: false
+        immutable: false
+    repository:
+      __metadata:
+        label: "Catalog Image Repository"
+        description: "Image Repository for Catalog UI Service"
+        type: "string"
+        required: false
+        immutable: false
+    tag:
+      __metadata:
+        label: "Catalog Image Tag"
+        description: "Tag of Catalog Image "
+        type: "string"
+        required: false
+        immutable: false
+  resources:
+    limits:
+      cpu:
+        __metadata:
+          label: "CPU limit"
+          description: "Resource limit of CPU"
+          type: "string"
+          immutable: false
+          required: false
+      memory:
+        __metadata:
+          label: "Memory limit"
+          description: "Resource limit of memory"
+          type: "string"
+          immutable: false
+          required: false
+    requests:
+      cpu:
+        __metadata:
+          label: "CPU request"
+          description: "Resource reqeust of CPU"
+          type: "string"
+          immutable: false
+          required: false
+      memory:
+        __metadata:
+          label: "Memory request"
+          description: "Resource reqeust of memory"
+          type: "string"
+          immutable: false
+          required: false
+  env:
+    cfcRouterUrl:
+      __metadata:
+        label: "ICP Management Ingress URL"
+        description: "URL of icp management ingress"
+        type: "string"
+        immutable: false
+        required: true
+    catalogApiRouteUrl:
+      __metadata:
+        label: "Helm API URL"
+        description: "URL for Helm API"
+        type: "string"
+        immutable: false
+        required: true
+    platformidentityproviderurl:
+      __metadata:
+        label: "Platform Identity Provider URL"
+        description: "URL for Platform Identity Provider"
+        type: "string"
+        immutable: false
+        required: true
+    wlpredirecturl:
+      __metadata:
+        label: "Redirect URL"
+        description: "Redirect URL After Successful Login"
+        type: "string"
+        immutable: false
+        required: true
+    hcmUiApiUrl:
+      __metadata:
+        label: "Hub API URL"
+        description: "Multicloud Hub API URL, component is mcm-ui-api"
+        type: "string"
+        immutable: false
+        required: true
+    hcmSearchApiUrl:
+      __metadata:
+        label: "Search API URL"
+        description: "Multicloud Search API URL"
+        type: "string"
+        immutable: false
+        required: true
+  service:
+    name:
+      __metadata:
+        label: "Service Name"
+        description:  "Name for Catalog UI Service "
+        type: "string"
+        immutable: false
+        required: true
+    port:
+      __metadata:
+        label: "Serf LAN Port to Listen on"
+        description: "The Serf LAN Port to Listen on"
+        type: "string"
+        required: false
+        immutable: false
+    targetPort:
+      __metadata:
+        label: "Target port to Listen on"
+        description: "The Target Port to Listen on"
+        type: "string"
+        required: false
+        immutable: false
+    servicePort:
+      __metadata:
+        label: "Service port to Listen on"
+        description: "The Service Port to Listen on"
+        type: "string"
+        required: false
+        immutable: false
+  secretKeyRef:
+    clientIdSecretName:
+      __metadata:
+        label: "Platform OIDC Secret Name"
+        description: "Secret Name for Platform OIDC"
+        type: "string"
+        required: false
+        immutable: false
+    clientIdSecretKey:
+      __metadata:
+        label: "Platform OIDC Secret Key"
+        description: "Secret Key for Platform OIDC"
+        type: "string"
+        required: false
+        immutable: false
+    clientSecretSecretKey:
+      _metadata:
+        label: "Platform OIDC Secret"
+        description: "Secret value for Platform OIDC"
+        type: "string"
+        required: false
+        immutable: false
+  # healthcheck configures the readiness probes for the Catalog UI pod.
+  healthcheck:
+    enabled:
+        __metadata:
+          label: "Enable Healthcheck"
+          description: "Enable/Disable Healthcheck"
+          type: "boolean"
+          immutable: false
+          required: false
+  runAsUser:
+    __metadata:
+      label: "Run as User"
+      description: "What user to run as"
+      type: "string"
+      immutable: false
+      required: false

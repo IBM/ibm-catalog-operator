@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .Values.catalogui.commonname }}
+  labels:
+    app: {{ .Values.catalogui.commonname  }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    component: "catalogui"
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service}}
+  annotations:
+    kubernetes.io/ingress.class: "ibm-icp-management"
+    icp.management.ibm.com/auth-type: "id-token"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: {{ .Values.catalogui.ingresspath }}
+        backend:
+          serviceName: {{ .Values.catalogui.commonname }}
+          servicePort: {{ .Values.catalogui.service.servicePort }}

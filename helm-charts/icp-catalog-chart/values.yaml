@@ -1,0 +1,46 @@
+# Default values for chart2.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates
+catalogui:
+  nodeSelector:
+    master: 'true'
+  tolerations:
+    - key: "dedicated"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "CriticalAddonsOnly"
+      operator: "Exists"
+  commonname: catalog-ui
+  ingresspath: /catalog/
+  pullPolicy: Always
+  image:
+    name: catalog-ui
+    repository: ibmcom/icp-catalog-ui
+    tag: 3.2.3
+  resources:
+    limits:
+      cpu: 300m
+      memory: 300Mi
+    requests:
+      cpu: 300m
+      memory: 300Mi
+  env:
+    cfcRouterUrl: https://icp-management-ingress:8443
+    catalogApiRouteUrl: https://icp-management-ingress:8443/helm-api
+    platformidentityproviderurl: https://icp-management-ingress:8443/idprovider
+    wlpredirecturl: http://localhost:3000/auth/liberty/callback
+    hcmUiApiUrl: https://mcm-312-ibm-mcm-prod-mcmuiapi:4000/hcmuiapi
+    hcmSearchApiUrl: https://search-search-api:4010/searchapi
+  service:
+    name: catalog-ui
+    port: 4000
+    targetPort: 4000
+    servicePort: 4000
+  secretKeyRef:
+    clientIdSecretName: platform-oidc-credentials
+    clientIdSecretKey: WLP_CLIENT_ID
+    clientSecretSecretKey: WLP_CLIENT_SECRET
+  # healthcheck configures the readiness probes for the Catalog UI pod.
+  healthcheck:
+      enabled: false
+  runAsUser: 65534
