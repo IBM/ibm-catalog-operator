@@ -1,7 +1,7 @@
 apiVersion: charts.helm.k8s.io/v1alpha1
 kind: IcpCatalogChart
 metadata:
-  name: example-icpcatalogchart
+  name: icp-catalog-chart
 spec:
   # Default values copied from <project_dir>/helm-charts/icp-catalog-chart/values.yaml
   

@@ -1,2 +1,2 @@
-# catalog-operator
-Operator project for common services Catalog
+# ibm-catalog-operator
+ibm-catalog-operator

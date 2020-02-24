@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: catalog-operator
+  name: ibm-catalog-operator
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: catalog-operator
+      name: ibm-catalog-operator
   template:
     metadata:
       labels:
-        name: catalog-operator
+        name: ibm-catalog-operator
     spec:
-      serviceAccountName: catalog-operator
+      serviceAccountName: ibm-catalog-operator
       containers:
-        - name: catalog-operator
+        - name: ibm-catalog-operator
           # Replace this with the built image name
-          image: REPLACE_IMAGE
+          image: quay.io/opencloudio/ibm-catalog-operator:latest
           imagePullPolicy: Always
           env:
             - name: WATCH_NAMESPACE
@@ -28,4 +28,4 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
             - name: OPERATOR_NAME
-              value: "catalog-operator"
+              value: "ibm-catalog-operator"

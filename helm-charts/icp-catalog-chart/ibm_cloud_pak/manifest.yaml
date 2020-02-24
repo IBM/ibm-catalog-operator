@@ -11,17 +11,17 @@ images:
 - image: icp-catalog-ui:3.2.3
   references:
   - repository: icp-catalog-ui-amd64:3.2.3
-    pull-repository: ibmcom/icp-catalog-ui-amd64:3.2.3
+    pull-repository: quay.io/opencloudio/icp-catalog-ui-amd64:3.2.3
     platform:
       os: linux
       architecture: amd64
   - repository: icp-catalog-ui-ppc64le:3.2.3
-    pull-repository: ibmcom/icp-catalog-ui-ppc64le:3.2.3
+    pull-repository: quay.io/opencloudio/icp-catalog-ui-ppc64le:3.2.3
     platform:
       os: linux
       architecture: ppc64le
   - repository: icp-catalog-ui-s390x:3.2.3
-    pull-repository: ibmcom/icp-catalog-ui-s390x:3.2.3
+    pull-repository: quay.io/opencloudio/icp-catalog-ui-s390x:3.2.3
     platform:
       os: linux
       architecture: s390x

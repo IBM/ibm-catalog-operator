@@ -2,7 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   creationTimestamp: null
-  name: catalog-operator
+  name: ibm-catalog-operator
 rules:
 - apiGroups:
   - ""
@@ -61,7 +61,7 @@ rules:
 - apiGroups:
   - apps
   resourceNames:
-  - catalog-operator
+  - ibm-catalog-operator
   resources:
   - deployments/finalizers
   verbs:

@@ -1,0 +1,229 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: |-
+      [
+        {
+          "apiVersion": "charts.helm.k8s.io/v1alpha1",
+          "kind": "IcpCatalogChart",
+          "metadata": {
+            "name": "icp-catalog-chart"
+          },
+          "spec": {
+            "catalogui": {
+              "commonname": "catalog-ui",
+              "env": {
+                "catalogApiRouteUrl": "https://icp-management-ingress:8443/helm-api",
+                "cfcRouterUrl": "https://icp-management-ingress:8443",
+                "hcmSearchApiUrl": "https://search-search-api:4010/searchapi",
+                "hcmUiApiUrl": "https://mcm-312-ibm-mcm-prod-mcmuiapi:4000/hcmuiapi",
+                "platformidentityproviderurl": "https://icp-management-ingress:8443/idprovider",
+                "wlpredirecturl": "http://localhost:3000/auth/liberty/callback"
+              },
+              "healthcheck": {
+                "enabled": false
+              },
+              "image": {
+                "name": "catalog-ui",
+                "repository": "ibmcom/icp-catalog-ui",
+                "tag": "3.2.3"
+              },
+              "ingresspath": "/catalog/",
+              "nodeSelector": {
+                "master": "true"
+              },
+              "pullPolicy": "Always",
+              "resources": {
+                "limits": {
+                  "cpu": "300m",
+                  "memory": "300Mi"
+                },
+                "requests": {
+                  "cpu": "300m",
+                  "memory": "300Mi"
+                }
+              },
+              "runAsUser": 65534,
+              "secretKeyRef": {
+                "clientIdSecretKey": "WLP_CLIENT_ID",
+                "clientIdSecretName": "platform-oidc-credentials",
+                "clientSecretSecretKey": "WLP_CLIENT_SECRET"
+              },
+              "service": {
+                "name": "catalog-ui",
+                "port": 4000,
+                "servicePort": 4000,
+                "targetPort": 4000
+              },
+              "tolerations": [
+                {
+                  "effect": "NoSchedule",
+                  "key": "dedicated",
+                  "operator": "Exists"
+                },
+                {
+                  "key": "CriticalAddonsOnly",
+                  "operator": "Exists"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    capabilities: Basic Install
+  name: ibm-catalog-operator.v0.0.1
+  namespace: placeholder
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions: {}
+  description: Placeholder description
+  displayName: Ibm Catalog Operator
+  install:
+    spec:
+      deployments:
+      - name: ibm-catalog-operator
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              name: ibm-catalog-operator
+          strategy: {}
+          template:
+            metadata:
+              labels:
+                name: ibm-catalog-operator
+            spec:
+              containers:
+              - env:
+                - name: WATCH_NAMESPACE
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.annotations['olm.targetNamespaces']
+                - name: POD_NAME
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.name
+                - name: OPERATOR_NAME
+                  value: ibm-catalog-operator
+                image: quay.io/opencloudio/ibm-catalog-operator:latest
+                imagePullPolicy: Always
+                name: ibm-catalog-operator
+                resources: {}
+              serviceAccountName: ibm-catalog-operator
+      permissions:
+      - rules:
+        - apiGroups:
+          - ""
+          resources:
+          - pods
+          - services
+          - services/finalizers
+          - endpoints
+          - persistentvolumeclaims
+          - events
+          - configmaps
+          - secrets
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - apps
+          resources:
+          - deployments
+          - daemonsets
+          - replicasets
+          - statefulsets
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - ""
+          resources:
+          - namespaces
+          verbs:
+          - get
+        - apiGroups:
+          - ""
+          resources:
+          - configmaps
+          - secrets
+          verbs:
+          - '*'
+        - apiGroups:
+          - monitoring.coreos.com
+          resources:
+          - servicemonitors
+          verbs:
+          - get
+          - create
+        - apiGroups:
+          - apps
+          resourceNames:
+          - ibm-catalog-operator
+          resources:
+          - deployments/finalizers
+          verbs:
+          - update
+        - apiGroups:
+          - ""
+          resources:
+          - pods
+          verbs:
+          - get
+        - apiGroups:
+          - apps
+          resources:
+          - replicasets
+          - deployments
+          verbs:
+          - get
+        - apiGroups:
+          - charts.helm.k8s.io
+          resources:
+          - '*'
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        serviceAccountName: ibm-catalog-operator
+    strategy: deployment
+  installModes:
+  - supported: true
+    type: OwnNamespace
+  - supported: true
+    type: SingleNamespace
+  - supported: false
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  keywords:
+  - IBM
+  - Cloud
+  - catalog
+  labels:
+    name: ibm-catalog-operator
+  links:
+  - name: IBM Catalog Operator Project
+    url: https://github.com/IBM/ibm-catalog-operator
+  maintainers:
+  - email: supports@ibm.com
+    name: IBM Support
+  maturity: alpha
+  provider:
+    name: IBM
+  version: 0.0.1

@@ -1,0 +1,13 @@
+scorecard:
+  # Setting a global scorecard option
+  output: json
+  plugins:
+    # `basic` tests configured to test 2 CRs
+    - basic:
+        cr-manifest:
+          - "deploy/crds/charts.helm.k8s.io_v1alpha1_icpcatalogchart_cr.yaml"
+    # `olm` tests configured to test 2 CRs
+    - olm:
+        cr-manifest:
+          - "deploy/crds/charts.helm.k8s.io_v1alpha1_icpcatalogchart_cr.yaml"
+        csv-path: "deploy/olm-catalog/0.0.1/ibm-catalog-operator/0.0.1/ibm-catalog-operator.v0.0.1.clusterserviceversion.yaml"

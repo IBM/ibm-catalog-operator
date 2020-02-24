@@ -1,11 +1,14 @@
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: catalog-operator
+  name: ibm-catalog-operator
 subjects:
 - kind: ServiceAccount
-  name: catalog-operator
+  name: ibm-catalog-operator
+- kind: Group
+  name: system:serviceaccounts:ibm-common-services
+  apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role
-  name: catalog-operator
+  name: ibm-catalog-operator
   apiGroup: rbac.authorization.k8s.io
