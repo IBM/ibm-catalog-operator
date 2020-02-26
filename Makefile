@@ -20,7 +20,7 @@
 BUILD_LOCALLY ?= 1
 
 # The namespce that the operator will be deployed in
-NAMESPACE=ibm-catalog-operator
+NAMESPACE=ibm-common-services
 
 # Image URL to use all building/pushing image targets;
 # Use your own docker registry and image name for dev/test by overridding the IMG and REGISTRY environment variable.
@@ -80,10 +80,10 @@ lint: lint-all
 
 generate-csv: ## Generate CSV
 	- operator-sdk generate csv --csv-version $(CSV_VERSION)
-	@cp deploy/crds/operator.ibm.com_icpcatalogcharts_crd.yaml deploy/olm-catalog/$(NAMESPACE)/$(CSV_VERSION)/
+	@cp deploy/crds/operator.ibm.com_icpcatalogcharts_crd.yaml deploy/olm-catalog/$(BASE_DIR)/$(CSV_VERSION)/
 
 push-csv: ## Push CSV package to the catalog
-	@RELEASE=${CSV_VERSION} common/scripts/push-csv.sh
+	@RELEASE=${CSV_VERSION} commonUtil/scripts/push-csv.sh
 
 ############################################################
 # test section
@@ -150,7 +150,9 @@ push-multi-arch:
 ifeq ($(TARGET_OS),$(filter $(TARGET_OS),linux darwin))
 	@curl -L -o /tmp/manifest-tool https://github.com/estesp/manifest-tool/releases/download/v1.0.0/manifest-tool-$(TARGET_OS)-amd64
 	@chmod +x /tmp/manifest-tool
+	@echo "Merging and push multi-arch image $(REGISTRY)/$(IMG):latest"
 	@/tmp/manifest-tool --username $(QUAY_USERNAME) --password $(QUAY_PASSWORD) push from-args --platforms linux/amd64,linux/ppc64le,linux/s390x --template $(REGISTRY)/$(IMG)-ARCH:$(VERSION) --target $(REGISTRY)/$(IMG):latest --ignore-missing
+	@echo "Merging and push multi-arch image $(REGISTRY)/$(IMG):v$(CSV_VERSION)"
 	@/tmp/manifest-tool --username $(QUAY_USERNAME) --password $(QUAY_PASSWORD) push from-args --platforms linux/amd64,linux/ppc64le,linux/s390x --template $(REGISTRY)/$(IMG)-ARCH:$(VERSION) --target $(REGISTRY)/$(IMG):v$(CSV_VERSION) --ignore-missing
 endif
 

@@ -1,5 +1,5 @@
 ---
 - version: v1alpha1
-  group: charts.helm.k8s.io
+  group: operator.ibm.com
   kind: IcpCatalogChart
   chart: helm-charts/icp-catalog-chart

@@ -15,6 +15,7 @@ rules:
   - events
   - configmaps
   - secrets
+  - ingress
   verbs:
   - create
   - delete
@@ -80,7 +81,7 @@ rules:
   verbs:
   - get
 - apiGroups:
-  - charts.helm.k8s.io
+  - operator.ibm.com
   resources:
   - '*'
   verbs:
