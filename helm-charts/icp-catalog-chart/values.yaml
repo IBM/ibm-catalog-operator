@@ -15,7 +15,7 @@ catalogui:
   pullPolicy: Always
   image:
     name: catalog-ui
-    repository: ibmcom/icp-catalog-ui
+    repository: quay.io/opencloudio/icp-catalog-ui
     tag: 3.2.3
   resources:
     limits:

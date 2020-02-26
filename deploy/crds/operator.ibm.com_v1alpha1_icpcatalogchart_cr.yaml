@@ -1,4 +1,4 @@
-apiVersion: charts.helm.k8s.io/v1alpha1
+apiVersion: operator.ibm.com/v1alpha1
 kind: IcpCatalogChart
 metadata:
   name: icp-catalog-chart
@@ -22,7 +22,7 @@ spec:
     pullPolicy: Always
     image:
       name: catalog-ui
-      repository: ibmcom/icp-catalog-ui
+      repository: quay.io/opencloudio/icp-catalog-ui
       tag: 3.2.3
     resources:
       limits:

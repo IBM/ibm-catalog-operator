@@ -1,9 +1,9 @@
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
-  name: icpcatalogcharts.charts.helm.k8s.io
+  name: icpcatalogcharts.operator.ibm.com
 spec:
-  group: charts.helm.k8s.io
+  group: operator.ibm.com
   names:
     kind: IcpCatalogChart
     listKind: IcpCatalogChartList
@@ -15,7 +15,7 @@ spec:
   validation:
     openAPIV3Schema:
       type: object
-      x-kubernetes-preserve-unknown-fields: true
+      x-kubernetes-preserve-unknown-fields: true  
   versions:
   - name: v1alpha1
     served: true

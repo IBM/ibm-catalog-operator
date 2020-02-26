@@ -44,26 +44,17 @@ VERSION ?= $(shell git describe --exact-match 2> /dev/null || \
                  git describe --match=$(git rev-parse --short=8 HEAD) --always --dirty --abbrev=8)
 
 LOCAL_OS := $(shell uname)
+LOCAL_ARCH := $(shell uname -m)
 ifeq ($(LOCAL_OS),Linux)
     TARGET_OS ?= linux
     XARGS_FLAGS="-r"
+	STRIP_FLAGS=
 else ifeq ($(LOCAL_OS),Darwin)
     TARGET_OS ?= darwin
     XARGS_FLAGS=
+	STRIP_FLAGS="-x"
 else
     $(error "This system's OS $(LOCAL_OS) isn't recognized/supported")
-endif
-
-ARCH := $(shell uname -m)
-LOCAL_ARCH := "amd64"
-ifeq ($(ARCH),x86_64)
-    LOCAL_ARCH="amd64"
-else ifeq ($(ARCH),ppc64le)
-    LOCAL_ARCH="ppc64le"
-else ifeq ($(ARCH),s390x)
-    LOCAL_ARCH="s390x"
-else
-    $(error "This system's ARCH $(ARCH) isn't recognized/supported")
 endif
 
 all: check test build images
@@ -84,12 +75,23 @@ check: lint ## Check all files lint error
 lint: lint-all
 
 ############################################################
+# csv section
+############################################################
+
+generate-csv: ## Generate CSV
+	- operator-sdk generate csv --csv-version $(CSV_VERSION)
+	@cp deploy/crds/operator.ibm.com_icpcatalogcharts_crd.yaml deploy/olm-catalog/$(NAMESPACE)/$(CSV_VERSION)/
+
+push-csv: ## Push CSV package to the catalog
+	@RELEASE=${CSV_VERSION} common/scripts/push-csv.sh
+
+############################################################
 # test section
 ############################################################
 
-test: test-e2e
+test: test-e2e ## Run integration e2e tests with different options
 
-test-e2e: ## Run integration e2e tests with different options
+test-e2e: 
 	@echo ... Running the same e2e tests with different args ...
 	@echo ... Running locally ...
 	- operator-sdk test local ./test/e2e --verbose --up-local --namespace=${NAMESPACE}
@@ -110,39 +112,47 @@ ifeq ($(BUILD_LOCALLY),0)
 config-docker:
 endif
 
-build: install-operator-sdk $(CONFIG_DOCKER_TARGET) build-amd64 build-ppc64le build-s390x build-release ## Build multi-arch images
+build: install-operator-sdk $(CONFIG_DOCKER_TARGET) build-amd64 build-ppc64le build-s390x ## Build multi-arch operator images
 
 build-amd64:
+	$(eval ARCH := $(shell uname -m|sed 's/x86_64/amd64/'))
 	@echo "Building the ${IMG} amd64 binary..."
 	@operator-sdk build --image-build-args "-f build/Dockerfile" $(REGISTRY)/$(IMG)-amd64:$(VERSION)
+	@if [ $(BUILD_LOCALLY) -ne 1 ] && [ "$(ARCH)" = "amd64" ]; then docker push $(REGISTRY)/$(IMG)-amd64:$(VERSION); fi
 
 build-ppc64le:
 	@echo "Building the ${IMG} ppc64le binary..."
 	@operator-sdk build --image-build-args "-f build/Dockerfile.ppc64le" $(REGISTRY)/$(IMG)-ppc64le:$(VERSION)
+	@if [ $(BUILD_LOCALLY) -ne 1 ] && [ "$(ARCH)" = "amd64" ]; then docker push $(REGISTRY)/$(IMG)-ppc64le:$(VERSION); fi
 
 build-s390x:
 	@echo "Building the ${IMG} s390x binary..."
 	@operator-sdk build --image-build-args "-f build/Dockerfile.s390x" $(REGISTRY)/$(IMG)-s390x:$(VERSION)
+	@if [ $(BUILD_LOCALLY) -ne 1 ] && [ "$(ARCH)" = "amd64" ]; then docker push $(REGISTRY)/$(IMG)-s390x:$(VERSION); fi
 
-build-release:
-ifeq ($(LOCAL_OS),Linux)
-ifeq ($(LOCAL_ARCH),x86_64)
-	@curl -L -o /tmp/manifest-tool https://github.com/estesp/manifest-tool/releases/download/v1.0.0/manifest-tool-linux-amd64
+
+############################################################
+# Release section
+############################################################
+
+release: clean build push-amd64 push-ppc64le push-s390x push-multi-arch ## Release multi-arch operator image
+
+push-amd64:
+	docker push $(REGISTRY)/$(IMG)-amd64:$(VERSION)
+
+push-ppc64le:
+	docker push $(REGISTRY)/$(IMG)-ppc64le:$(VERSION)
+
+push-s390x:
+	docker push $(REGISTRY)/$(IMG)-s390x:$(VERSION)
+
+push-multi-arch:
+ifeq ($(TARGET_OS),$(filter $(TARGET_OS),linux darwin))
+	@curl -L -o /tmp/manifest-tool https://github.com/estesp/manifest-tool/releases/download/v1.0.0/manifest-tool-$(TARGET_OS)-amd64
 	@chmod +x /tmp/manifest-tool
-	/tmp/manifest-tool push from-args --platforms linux/amd64,linux/ppc64le,linux/s390x --template $(REGISTRY)/$(IMG)-ARCH:$(VERSION) --target $(REGISTRY)/$(IMG) --ignore-missing
-	/tmp/manifest-tool push from-args --platforms linux/amd64,linux/ppc64le,linux/s390x --template $(REGISTRY)/$(IMG)-ARCH:$(VERSION) --target $(REGISTRY)/$(IMG):$(VERSION) --ignore-missing
+	@/tmp/manifest-tool --username $(QUAY_USERNAME) --password $(QUAY_PASSWORD) push from-args --platforms linux/amd64,linux/ppc64le,linux/s390x --template $(REGISTRY)/$(IMG)-ARCH:$(VERSION) --target $(REGISTRY)/$(IMG):latest --ignore-missing
+	@/tmp/manifest-tool --username $(QUAY_USERNAME) --password $(QUAY_PASSWORD) push from-args --platforms linux/amd64,linux/ppc64le,linux/s390x --template $(REGISTRY)/$(IMG)-ARCH:$(VERSION) --target $(REGISTRY)/$(IMG):v$(CSV_VERSION) --ignore-missing
 endif
-endif
-
-############################################################
-# images section
-############################################################
-
-images: build push-images
-
-push-images:
-	@docker tag $(REGISTRY)/$(IMG):$(VERSION) $(REGISTRY)/$(IMG)
-	@if [ $(BUILD_LOCALLY) -ne 1 ]; then docker push $(REGISTRY)/$(IMG):$(VERSION); docker push $(REGISTRY)/$(IMG); fi
 
 ############################################################
 # application section
@@ -155,7 +165,7 @@ install: ## Install all resources (CR/CRD's, RBCA and Operator)
 	@echo ....... Creating namespace .......
 	- kubectl create namespace ${NAMESPACE}
 	@echo ....... Applying CRDS and Operator .......
-	- kubectl apply -f deploy/crds/charts.helm.k8s.io_icpcatalogcharts_crd.yaml --validate=false
+	- kubectl apply -f deploy/crds/operator.ibm.com_icpcatalogcharts_crd.yaml
 	@echo ....... Applying RBAC .......
 	- kubectl apply -f deploy/service_account.yaml -n ${NAMESPACE}
 	- kubectl apply -f deploy/role.yaml -n ${NAMESPACE}
@@ -163,16 +173,16 @@ install: ## Install all resources (CR/CRD's, RBCA and Operator)
 	@echo ....... Applying Operator .......
 	- kubectl apply -f deploy/operator.yaml -n ${NAMESPACE}
 	@echo ....... Creating the Instance .......
-	- kubectl apply -f deploy/crds/charts.helm.k8s.io_v1alpha1_icpcatalogchart_cr.yaml -n ${NAMESPACE}
+	- kubectl apply -f deploy/crds/operator.ibm.com_v1alpha1_icpcatalogchart_cr.yaml -n ${NAMESPACE}
 
 uninstall: ## Uninstall all that all performed in the $ make install
 	@echo ....... Uninstalling .......
 	@echo ....... Deleting CR .......
-	- kubectl delete -f deploy/crds/charts.helm.k8s.io_v1alpha1_icpcatalogchart_cr.yaml -n ${NAMESPACE}
+	- kubectl delete -f deploy/crds/operator.ibm.com_v1alpha1_icpcatalogchart_cr.yaml -n ${NAMESPACE}
 	@echo ....... Deleting Operator .......
 	- kubectl delete -f deploy/operator.yaml -n ${NAMESPACE}
 	@echo ....... Deleting CRDs.......
-	- kubectl delete -f deploy/crds/charts.helm.k8s.io_icpcatalogcharts_crd.yaml
+	- kubectl delete -f deploy/crds/operator.ibm.com_icpcatalogcharts_crd.yaml
 	@echo ....... Deleting Rules and Service Account .......
 	- kubectl delete -f deploy/role_binding.yaml -n ${NAMESPACE}
 	- kubectl delete -f deploy/service_account.yaml -n ${NAMESPACE}
