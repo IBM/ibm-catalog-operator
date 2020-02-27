@@ -130,6 +130,7 @@ spec:
           - events
           - configmaps
           - secrets
+          - ingress
           verbs:
           - create
           - delete
@@ -198,6 +199,18 @@ spec:
           - operator.ibm.com
           resources:
           - '*'
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - extensions
+          resources:
+          - ingresses
           verbs:
           - create
           - delete
