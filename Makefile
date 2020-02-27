@@ -192,6 +192,14 @@ uninstall: ## Uninstall all that all performed in the $ make install
 	@echo ....... Deleting namespace ${NAMESPACE}.......
 	- kubectl delete namespace ${NAMESPACE}
 
+
+############################################################
+# operator source section
+############################################################
+operatorsource: ## Create opencloud-operators operator source
+	- kubectl delete -f commonUtil/resources/opencloud-operators.yaml
+	- kubectl apply -f commonUtil/resources/opencloud-operators.yaml
+
 ############################################################
 # clean section
 ############################################################
