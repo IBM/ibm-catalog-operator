@@ -7,15 +7,15 @@ rules:
 - apiGroups:
   - ""
   resources:
+  - configmaps
+  - endpoints
+  - events
+  - persistentvolumeclaims
   - pods
+  - secrets
+  - serviceaccounts
   - services
   - services/finalizers
-  - endpoints
-  - persistentvolumeclaims
-  - events
-  - configmaps
-  - secrets
-  - ingress
   verbs:
   - create
   - delete
@@ -40,18 +40,25 @@ rules:
   - update
   - watch
 - apiGroups:
-  - ""
+  - apps
+  resourceNames:
+  - ibm-platform-api-operator
   resources:
-  - namespaces
+  - deployments/finalizers
   verbs:
-  - get
+  - update
 - apiGroups:
-  - ""
+  - extensions
   resources:
-  - configmaps
-  - secrets
+  - ingresses
   verbs:
-  - '*'
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
 - apiGroups:
   - monitoring.coreos.com
   resources:
@@ -59,27 +66,6 @@ rules:
   verbs:
   - get
   - create
-- apiGroups:
-  - apps
-  resourceNames:
-  - ibm-catalog-operator
-  resources:
-  - deployments/finalizers
-  verbs:
-  - update
-- apiGroups:
-  - ""
-  resources:
-  - pods
-  verbs:
-  - get
-- apiGroups:
-  - apps
-  resources:
-  - replicasets
-  - deployments
-  verbs:
-  - get
 - apiGroups:
   - operator.ibm.com
   resources:
@@ -92,10 +78,16 @@ rules:
   - patch
   - update
   - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ibm-catalog-operator
+rules:
 - apiGroups:
-  - extensions
+  - security.openshift.io
   resources:
-  - ingresses
+  - securitycontextconstraints
   verbs:
   - create
   - delete
