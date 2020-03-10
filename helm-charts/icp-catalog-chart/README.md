@@ -154,7 +154,7 @@ The following table lists the configurable parameters of the `catalog-ui` chart 
 
 | Parameter                        | Description                                     | Default                                                    |
 | -------------------------------- | ----------------------------------------------- | ---------------------------------------------------------- |
-| `image.repository`               | Image full name including repository            | `ibmcom/icp-catalog-ui`                                                |
+| `image.repository`               | Image full name including repository            | `quay.io/opencloudio/icp-catalog-ui`                                                |
 | `image.tag`                      | Image tag                                       | `3.1.1`                                                        |
 | `image.pullPolicy`               | Image pull policy                               | `IfNotPresent`                                             |
 | `envVar.cfcRouterUrl`                   | IBM Cloud Private management ingress URL       | `https://icp-management-ingress:8443`                                  |

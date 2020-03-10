@@ -1,11 +1,24 @@
-kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
 metadata:
-  name: catalog-operator
+  name: ibm-catalog-ui-operator
 subjects:
 - kind: ServiceAccount
-  name: catalog-operator
+  name: ibm-catalog-ui-operator
 roleRef:
-  kind: Role
-  name: catalog-operator
   apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: ibm-catalog-ui-operator
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: ibm-catalog-ui-operator
+subjects:
+- kind: ServiceAccount
+  name: ibm-catalog-ui-operator
+  namespace: ibm-common-services
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: ibm-catalog-ui-operator
