@@ -1,0 +1,49 @@
+apiVersion: operator.ibm.com/v1alpha1
+kind: CatalogUI
+metadata:
+  name: default-catalog-ui
+spec:
+  # Default values copied from <project_dir>/helm-charts/icp-catalog-chart/values.yaml
+  
+  catalogui:
+    commonname: catalog-ui
+    env:
+      catalogApiRouteUrl: https://icp-management-ingress:8443/helm-api
+      cfcRouterUrl: https://icp-management-ingress:8443
+      hcmSearchApiUrl: https://search-search-api:4010/searchapi
+      hcmUiApiUrl: https://mcm-312-ibm-mcm-prod-mcmuiapi:4000/hcmuiapi
+      platformidentityproviderurl: https://icp-management-ingress:8443/idprovider
+      wlpredirecturl: http://localhost:3000/auth/liberty/callback
+    healthcheck:
+      enabled: false
+    image:
+      name: catalog-ui
+      repository: quay.io/opencloudio/icp-catalog-ui
+      tag: 3.2.3
+    ingresspath: /catalog/
+    nodeSelector: {}
+    pullPolicy: Always
+    resources:
+      limits:
+        cpu: 300m
+        memory: 300Mi
+      requests:
+        cpu: 300m
+        memory: 300Mi
+    runAsUser: 65534
+    secretKeyRef:
+      clientIdSecretKey: WLP_CLIENT_ID
+      clientIdSecretName: platform-oidc-credentials
+      clientSecretSecretKey: WLP_CLIENT_SECRET
+    service:
+      name: catalog-ui
+      port: 4000
+      servicePort: 4000
+      targetPort: 4000
+    tolerations:
+    - effect: NoSchedule
+      key: dedicated
+      operator: Exists
+    - key: CriticalAddonsOnly
+      operator: Exists
+  

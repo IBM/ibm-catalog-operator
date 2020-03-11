@@ -18,5 +18,4 @@ keywords:
 - IcpClusterResource
 kubeVersion: '>=1.10.0'
 name: icp-catalog-chart
-tillerVersion: '>=2.7.3'
 version: 3.4.1
