@@ -14,11 +14,11 @@ metadata:
             "catalogui": {
               "commonname": "catalog-ui",
               "env": {
-                "catalogApiRouteUrl": "https://icp-management-ingress:8443/helm-api",
-                "cfcRouterUrl": "https://icp-management-ingress:8443",
+                "catalogApiRouteUrl": "https://icp-management-ingress:443/helm-api",
+                "cfcRouterUrl": "https://icp-management-ingress:443",
                 "hcmSearchApiUrl": "https://search-search-api:4010/searchapi",
                 "hcmUiApiUrl": "https://mcm-312-ibm-mcm-prod-mcmuiapi:4000/hcmuiapi",
-                "platformidentityproviderurl": "https://icp-management-ingress:8443/idprovider",
+                "platformidentityproviderurl": "https://icp-management-ingress:443/idprovider",
                 "wlpredirecturl": "http://localhost:3000/auth/liberty/callback"
               },
               "healthcheck": {

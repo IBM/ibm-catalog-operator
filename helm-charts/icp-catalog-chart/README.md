@@ -157,9 +157,9 @@ The following table lists the configurable parameters of the `catalog-ui` chart 
 | `image.repository`               | Image full name including repository            | `quay.io/opencloudio/icp-catalog-ui`                                                |
 | `image.tag`                      | Image tag                                       | `3.1.1`                                                        |
 | `image.pullPolicy`               | Image pull policy                               | `IfNotPresent`                                             |
-| `envVar.cfcRouterUrl`                   | IBM Cloud Private management ingress URL       | `https://icp-management-ingress:8443`                                  |
-| `envVar.identityProviderUrl`            | Identity Provider URL as provided by the `auth-idp` service                    | `https://icp-management-ingress:8443/idprovider`     |
-| `envVar.authServiceUrl`            | Auth Service URL as provided by the `auth-idp` service                      | `https://icp-management-ingress:8443/idprovider`     |
+| `envVar.cfcRouterUrl`                   | IBM Cloud Private management ingress URL       | `https://icp-management-ingress:443`                                  |
+| `envVar.identityProviderUrl`            | Identity Provider URL as provided by the `auth-idp` service                    | `https://icp-management-ingress:443/idprovider`     |
+| `envVar.authServiceUrl`            | Auth Service URL as provided by the `auth-idp` service                      | `https://icp-management-ingress:443/idprovider`     |
 | `envVar.secretRefName`            | Name of OIDC secret                        | `platform-oidc-credentials`     |
 | `resources.limits.cpu`          | Kubernetes CPU limit for the Queue Manager container | `300mi`                                                   |
 | `resources.limits.memory`       | Kubernetes memory limit for the Queue Manager container | `256Mi`                                              |
