@@ -8,20 +8,20 @@ charts:
   repository-keys:
     - catalog.catalogui.image.repository
 images:
-- image: icp-catalog-ui:3.2.3
+- image: icp-catalog-ui:3.2.4
   references:
-  - repository: icp-catalog-ui-amd64:3.2.3
-    pull-repository: ibmcom/icp-catalog-ui-amd64:3.2.3
+  - repository: icp-catalog-ui-amd64:3.2.4
+    pull-repository: ibmcom/icp-catalog-ui-amd64:3.2.4
     platform:
       os: linux
       architecture: amd64
-  - repository: icp-catalog-ui-ppc64le:3.2.3
-    pull-repository: ibmcom/icp-catalog-ui-ppc64le:3.2.3
+  - repository: icp-catalog-ui-ppc64le:3.2.4
+    pull-repository: ibmcom/icp-catalog-ui-ppc64le:3.2.4
     platform:
       os: linux
       architecture: ppc64le
-  - repository: icp-catalog-ui-s390x:3.2.3
-    pull-repository: ibmcom/icp-catalog-ui-s390x:3.2.3
+  - repository: icp-catalog-ui-s390x:3.2.4
+    pull-repository: ibmcom/icp-catalog-ui-s390x:3.2.4
     platform:
       os: linux
       architecture: s390x

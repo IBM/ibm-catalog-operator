@@ -27,7 +27,7 @@ metadata:
               "image": {
                 "name": "catalog-ui",
                 "repository": "quay.io/opencloudio/icp-catalog-ui",
-                "tag": "3.2.3"
+                "tag": "3.2.4"
               },
               "ingresspath": "/catalog/",
               "nodeSelector": {},
