@@ -22,6 +22,7 @@ spec:
     metadata:
       labels:
         app: {{ .Values.catalogui.commonname  }}
+        app.kubernetes.io/instance: "{{ .Release.Name }}"
         chart: "{{ .Chart.Name }}"
         component: "catalogui"
         release: {{ .Release.Name }}
@@ -29,6 +30,10 @@ spec:
         k8s-app: {{ .Values.catalogui.commonname }}
       annotations:
         seccomp.security.alpha.kubernetes.io/pod: docker/default
+        productName: IBM Cloud Platform Common Services
+        productID: "068a62892a1e4db39641342e592daa25"
+        productVersion: "3.3.0"
+        productMetric: FREE
     spec:
       serviceAccount: catalog-ui-sa
       terminationGracePeriodSeconds: 60
