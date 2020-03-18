@@ -3,4 +3,4 @@ Note: It may take some time for Catalog UI to initialize, please be patient.
 Once it has finished initializing, Catalog UI can be accessed via the following URL, where <proxy_ip> refers to your IBM Cloud Private proxy server:
 
 To access the UI:
-  https://<proxy_ip>:8443/catalog/
+  https://<proxy_ip>:443/catalog/
