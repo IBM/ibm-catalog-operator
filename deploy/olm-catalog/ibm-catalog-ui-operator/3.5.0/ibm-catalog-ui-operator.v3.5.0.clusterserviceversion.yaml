@@ -142,7 +142,7 @@ spec:
                       fieldPath: metadata.name
                 - name: OPERATOR_NAME
                   value: ibm-catalog-ui-operator
-                image: quay.io/opencloudio/ibm-catalog-ui-operator
+                image: quay.io/opencloudio/ibm-catalog-ui-operator:v3.5.0
                 imagePullPolicy: Always
                 name: ibm-catalog-ui-operator
                 resources: {}
