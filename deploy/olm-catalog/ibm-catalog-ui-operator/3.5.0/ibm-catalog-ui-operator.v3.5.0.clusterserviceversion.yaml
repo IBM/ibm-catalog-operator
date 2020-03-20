@@ -70,7 +70,7 @@ metadata:
         }
       ]
     capabilities: Basic Install
-  name: ibm-catalog-ui-operator.v0.0.1
+  name: ibm-catalog-ui-operator.v3.5.0
   namespace: ibm-common-services
 spec:
   apiservicedefinitions: {}
@@ -142,7 +142,7 @@ spec:
                       fieldPath: metadata.name
                 - name: OPERATOR_NAME
                   value: ibm-catalog-ui-operator
-                image: quay.io/opencloudio/ibm-catalog-ui-operator
+                image: quay.io/opencloudio/ibm-catalog-ui-operator:v3.5.0
                 imagePullPolicy: Always
                 name: ibm-catalog-ui-operator
                 resources: {}
@@ -270,5 +270,5 @@ spec:
   maturity: alpha
   provider:
     name: IBM
-  replaces: ibm-catalog-ui-operator.v0.0.0
-  version: 0.0.1
+  replaces: ibm-catalog-ui-operator.v0.0.1
+  version: 3.5.0

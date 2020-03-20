@@ -1,7 +1,7 @@
 apiVersion: operator.ibm.com/v1alpha1
 kind: CatalogUI
 metadata:
-  name: default-catalog-ui
+  name: catalog-ui
 spec:
   # Default values copied from <project_dir>/helm-charts/icp-catalog-chart/values.yaml
   
