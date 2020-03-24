@@ -163,6 +163,16 @@ ifeq ($(TARGET_OS),$(filter $(TARGET_OS),linux darwin))
 endif
 
 ############################################################
+# Dev image section
+############################################################
+
+dev-image: clean build-amd64 push-amd64-dev ## Release development amd64 operator image 
+
+push-amd64-dev:
+	@docker tag $(REGISTRY)/$(IMG)-amd64:$(VERSION) $(REGISTRY)/$(IMG):dev
+	@docker push $(REGISTRY)/$(IMG):dev
+
+############################################################
 # application section
 ############################################################
 
@@ -179,12 +189,12 @@ install: ## Install all resources (CR/CRD's, RBCA and Operator)
 	@echo ....... Applying Operator .......
 	- kubectl apply -f deploy/olm-catalog/${BASE_DIR}/${CSV_VERSION}/${BASE_DIR}.v${CSV_VERSION}.clusterserviceversion.yaml -n ${NAMESPACE}
 	@echo ....... Creating the Instance .......
-	- kubectl apply -f deploy/crds/operator.ibm.com_v1alpha1_*_cr.yaml -n ${NAMESPACE}
+	- for cr in $(shell ls deploy/crds/*_cr.yaml); do kubectl apply -f $${cr} -n ${NAMESPACE}; done
 
 uninstall: ## Uninstall all that all performed in the $ make install
 	@echo ....... Uninstalling .......
 	@echo ....... Deleting CR .......
-	- kubectl delete -f deploy/crds/operator.ibm.com_v1alpha1_*_cr.yaml -n ${NAMESPACE}
+	- for cr in $(shell ls deploy/crds/*_cr.yaml); do kubectl delete -f $${cr} -n ${NAMESPACE}; done
 	@echo ....... Deleting Operator .......
 	- kubectl delete -f deploy/olm-catalog/${BASE_DIR}/${CSV_VERSION}/${BASE_DIR}.v${CSV_VERSION}.clusterserviceversion.yaml -n ${NAMESPACE}
 	@echo ....... Deleting CRDs.......
