@@ -70,6 +70,13 @@ metadata:
         }
       ]
     capabilities: Basic Install
+    categories: Developer Tools
+    certified: "false"
+    containerImage: quay.io/opencloudio/ibm-catalog-ui-operator:v3.5.0
+    createdAt: "2020-03-24T01:00:00Z"
+    description: CatalogUI provides Catalog UI service for Helm charts management.
+    repository: https://github.com/IBM/ibm-catalog-ui-operator
+    support: IBM
   name: ibm-catalog-ui-operator.v3.5.0
   namespace: ibm-common-services
 spec:
@@ -80,6 +87,15 @@ spec:
       displayName: CatalogUI
       kind: CatalogUI
       name: cataloguis.operator.ibm.com
+      resources:
+      - version: v1
+        kind: DaemonSet
+      - version: v1
+        kind: Pod
+      - version: v1
+        kind: Secret
+      - version: v1
+        kind: Service
       version: v1alpha1
   description: CatalogUI provides Catalog UI service for Helm charts management
   displayName: IBM Catalog UI Operator
