@@ -88,14 +88,35 @@ spec:
       kind: CatalogUI
       name: cataloguis.operator.ibm.com
       resources:
-      - version: v1
-        kind: DaemonSet
-      - version: v1
-        kind: Pod
-      - version: v1
-        kind: Secret
-      - version: v1
-        kind: Service
+      - kind: DaemonSet
+        name: DaemonSet
+        version: v1
+      - kind: Ingress
+        name: Ingress
+        version: extensions/v1beta1
+      - kind: Pod
+        name: Pod
+        version: v1
+      - kind: RoleBinding
+        name: RoleBinding
+        version: rbac.authorization.k8s.io/v1
+      - kind: Service
+        name: Service
+        version: v1
+      - kind: ServiceAccount
+        name: ServiceAccount
+        version: v1
+      specDescriptors:
+      - description: Configuration for Multicloud Manager Catalog UI Service
+        displayName: Catalog UI
+        path: catalogui
+      statusDescriptors:
+      - description: Conditions contains the observed states of the Helm release
+        displayName: Conditions
+        path: conditions
+      - description: Deployed Release shows the manifest of the deployed Helm release
+        displayName: Deployed Release
+        path: deployedRelease
       version: v1alpha1
   description: CatalogUI provides Catalog UI service for Helm charts management
   displayName: IBM Catalog UI Operator
@@ -158,7 +179,7 @@ spec:
                       fieldPath: metadata.name
                 - name: OPERATOR_NAME
                   value: ibm-catalog-ui-operator
-                image: quay.io/opencloudio/ibm-catalog-ui-operator:v3.5.0
+                image: quay.io/opencloudio/ibm-catalog-ui-operator:3.5.0
                 imagePullPolicy: Always
                 name: ibm-catalog-ui-operator
                 resources: {}
