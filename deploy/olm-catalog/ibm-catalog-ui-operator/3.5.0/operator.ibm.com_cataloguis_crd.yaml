@@ -14,8 +14,61 @@ spec:
     status: {}
   validation:
     openAPIV3Schema:
+      description: CatalogUI is the Schema for the cataloguis API
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+          type: string
+        spec:
+          properties:
+            catalogui:
+              type: object
+              x-kubernetes-preserve-unknown-fields: true
+          required:
+          - catalogui
+          type: object
+          x-kubernetes-preserve-unknown-fields: true
+        status:
+          properties:
+            conditions:
+              items:
+                properties:
+                  lastTransitionTime:
+                    type: string
+                  lastUpdateTime:
+                    type: string
+                  message:
+                    type: string
+                  reason:
+                    type: string
+                  status:
+                    type: string
+                  type:
+                    type: string
+                required:
+                - status
+                - type
+                type: object
+              type: array
+            deployedRelease:
+              properties:
+                manifest:
+                  type: string
+                name:
+                  type: string
+              type: object
+          type: object
+      required:
+      - metadata
+      - spec
       type: object
-      x-kubernetes-preserve-unknown-fields: true
   version: v1alpha1
   versions:
   - name: v1alpha1
