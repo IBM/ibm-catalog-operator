@@ -1,4 +1,4 @@
-# ibm-catalog-ui-operator
+# IBM Catalog UI Operator
 
 Operator used to manager IBM Catalog UI service. The Catalag UI service provides an user interface for Helm charts management.
 
