@@ -12,7 +12,7 @@ catalogui:
   image:
     name: catalog-ui
     repository: quay.io/opencloudio/icp-catalog-ui
-    tag: 3.2.4
+    tag: 3.2.4-amd64
   ingresspath: /catalog/
   nodeSelector: {}
   pullPolicy: Always
