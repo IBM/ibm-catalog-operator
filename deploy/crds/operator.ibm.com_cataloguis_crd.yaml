@@ -120,11 +120,9 @@ spec:
                       type: string
                     operator:
                       type: string
-              x-kubernetes-preserve-unknown-fields: true
           required:
           - catalogui
           type: object
-          x-kubernetes-preserve-unknown-fields: true
         status:
           properties:
             conditions:
