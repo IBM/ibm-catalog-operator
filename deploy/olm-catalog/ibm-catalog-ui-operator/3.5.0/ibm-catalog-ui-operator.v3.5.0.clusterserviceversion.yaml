@@ -72,7 +72,7 @@ metadata:
     capabilities: Basic Install
     categories: Developer Tools
     certified: "false"
-    containerImage: quay.io/opencloudio/ibm-catalog-ui-operator:3.5.0-amd64
+    containerImage: quay.io/opencloudio/ibm-catalog-ui-operator:3.5.0
     createdAt: "2020-03-24T01:00:00Z"
     description: CatalogUI provides Catalog UI service for Helm charts management.
     repository: https://github.com/IBM/ibm-catalog-ui-operator
@@ -179,7 +179,7 @@ spec:
                       fieldPath: metadata.name
                 - name: OPERATOR_NAME
                   value: ibm-catalog-ui-operator
-                image: quay.io/opencloudio/ibm-catalog-ui-operator:3.5.0-amd64
+                image: quay.io/opencloudio/ibm-catalog-ui-operator:3.5.0
                 imagePullPolicy: Always
                 name: ibm-catalog-ui-operator
                 resources: {}
