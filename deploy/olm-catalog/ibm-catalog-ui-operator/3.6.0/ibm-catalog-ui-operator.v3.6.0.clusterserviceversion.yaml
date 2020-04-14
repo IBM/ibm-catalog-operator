@@ -308,3 +308,4 @@ spec:
   provider:
     name: IBM
   version: 3.6.0
+  replaces: ibm-catalog-ui-operator.v3.5.0
