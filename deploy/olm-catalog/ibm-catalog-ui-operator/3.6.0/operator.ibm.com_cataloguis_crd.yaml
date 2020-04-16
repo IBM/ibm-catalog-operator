@@ -58,6 +58,8 @@ spec:
                   properties:
                     name:
                       type: string
+                    imageRegistry:
+                      type: string
                     repository:
                       type: string
                     tag:
@@ -102,23 +104,19 @@ spec:
                     name:
                       type: string
                     port:
-                      type: integer #maybe string?
+                      type: integer
                     servicePort:
-                      type: integer #string?
+                      type: integer
                     targetPort:
-                      type: integer #string?
-                tolerations: #not really sure if this section is right
-                  type: object
+                      type: integer
+                tolerations:
+                  type: array
                   properties:
-                    effect:
-                      type: string
                     key:
                       type: string
                     operator:
                       type: string
-                    key: #not sure if the second key and operator need to be defined
-                      type: string
-                    operator:
+                    effect:
                       type: string
           required:
           - catalogui
