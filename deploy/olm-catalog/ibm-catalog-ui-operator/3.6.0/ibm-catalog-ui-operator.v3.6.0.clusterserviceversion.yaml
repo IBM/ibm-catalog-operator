@@ -25,8 +25,9 @@ metadata:
                 "enabled": false
               },
               "image": {
+                "imageRegistry": "quay.io/opencloudio",
                 "name": "catalog-ui",
-                "repository": "quay.io/opencloudio/icp-catalog-ui",
+                "repository": "icp-catalog-ui",
                 "tag": "3.2.4"
               },
               "ingresspath": "/catalog/",
@@ -307,5 +308,5 @@ spec:
   maturity: alpha
   provider:
     name: IBM
-  version: 3.6.0
   replaces: ibm-catalog-ui-operator.v3.5.0
+  version: 3.6.0

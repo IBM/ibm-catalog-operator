@@ -11,7 +11,8 @@ catalogui:
     enabled: false
   image:
     name: catalog-ui
-    repository: quay.io/opencloudio/icp-catalog-ui
+    imageRegistry: quay.io/opencloudio
+    repository: icp-catalog-ui
     tag: 3.2.4
   ingresspath: /catalog/
   nodeSelector: {}
