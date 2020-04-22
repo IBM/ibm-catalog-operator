@@ -12,11 +12,11 @@ catalogui:
   image:
     name: catalog-ui
     imageRegistry: quay.io/opencloudio
+    pullPolicy: IfNotPresent
     repository: icp-catalog-ui
     tag: 3.2.4
   ingresspath: /catalog/
   nodeSelector: {}
-  pullPolicy: Always
   resources:
     limits:
       cpu: 300m

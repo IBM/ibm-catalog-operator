@@ -5,34 +5,19 @@ metadata:
     alm-examples: |-
       [
         {
-          "apiVersion": "operator.ibm.com/v1alpha1",
+          "apiVersion": "operator.ibm.com/v1",
           "kind": "CatalogUI",
           "metadata": {
             "name": "catalog-ui"
           },
           "spec": {
             "catalogui": {
-              "commonname": "catalog-ui",
-              "env": {
-                "catalogApiRouteUrl": "https://icp-management-ingress:443/helm-api",
-                "cfcRouterUrl": "https://icp-management-ingress:443",
-                "hcmSearchApiUrl": "https://search-search-api:4010/searchapi",
-                "hcmUiApiUrl": "https://mcm-312-ibm-mcm-prod-mcmuiapi:4000/hcmuiapi",
-                "platformidentityproviderurl": "https://icp-management-ingress:443/idprovider",
-                "wlpredirecturl": "http://localhost:3000/auth/liberty/callback"
-              },
-              "healthcheck": {
-                "enabled": false
-              },
               "image": {
                 "imageRegistry": "quay.io/opencloudio",
-                "name": "catalog-ui",
+                "pullPolicy": "IfNotPresent",
                 "repository": "icp-catalog-ui",
                 "tag": "3.2.4"
               },
-              "ingresspath": "/catalog/",
-              "nodeSelector": {},
-              "pullPolicy": "Always",
               "resources": {
                 "limits": {
                   "cpu": "300m",
@@ -42,31 +27,9 @@ metadata:
                   "cpu": "300m",
                   "memory": "300Mi"
                 }
-              },
-              "runAsUser": 65534,
-              "secretKeyRef": {
-                "clientIdSecretKey": "WLP_CLIENT_ID",
-                "clientIdSecretName": "platform-oidc-credentials",
-                "clientSecretSecretKey": "WLP_CLIENT_SECRET"
-              },
-              "service": {
-                "name": "catalog-ui",
-                "port": 4000,
-                "servicePort": 4000,
-                "targetPort": 4000
-              },
-              "tolerations": [
-                {
-                  "effect": "NoSchedule",
-                  "key": "dedicated",
-                  "operator": "Exists"
-                },
-                {
-                  "key": "CriticalAddonsOnly",
-                  "operator": "Exists"
-                }
-              ]
-            }
+              }
+            },
+            "replicaCount": 1
           }
         },
         {
@@ -99,7 +62,7 @@ metadata:
               }
             ]
           }
-        }
+        }        
       ]
     capabilities: Basic Install
     categories: Developer Tools
@@ -120,8 +83,8 @@ spec:
       kind: CatalogUI
       name: cataloguis.operator.ibm.com
       resources:
-      - kind: DaemonSet
-        name: DaemonSet
+      - kind: Deployment
+        name: Deployment
         version: v1
       - kind: Ingress
         name: Ingress
@@ -142,6 +105,9 @@ spec:
       - description: Configuration for Multicloud Manager Catalog UI Service
         displayName: Catalog UI
         path: catalogui
+      - description: How many pods to run simultaneously
+        displayName: Replica count
+        path: replicaCount        
       statusDescriptors:
       - description: Conditions contains the observed states of the Helm release
         displayName: Conditions
@@ -149,7 +115,7 @@ spec:
       - description: Deployed Release shows the manifest of the deployed Helm release
         displayName: Deployed Release
         path: deployedRelease
-      version: v1alpha1
+      version: v1
   description: CatalogUI provides Catalog UI service for Helm charts management
   displayName: IBM Catalog UI Operator
   icon:

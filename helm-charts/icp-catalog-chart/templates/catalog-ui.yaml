@@ -1,6 +1,6 @@
 ---
 apiVersion: apps/v1
-kind: DaemonSet
+kind: Deployment
 metadata:
   name: {{ .Values.catalogui.commonname }}
   labels:
@@ -10,14 +10,10 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service}}
 spec:
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: catalog-ui
-  minReadySeconds: 0
-  updateStrategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
   template:
     metadata:
       labels:
@@ -63,7 +59,7 @@ spec:
       initContainers:
         - name: check-secret
           image: "{{ .Values.catalogui.image.imageRegistry }}/{{ .Values.catalogui.image.repository }}:{{ .Values.catalogui.image.tag }}"
-          imagePullPolicy: {{ .Values.catalogui.pullPolicy }}
+          imagePullPolicy: {{ .Values.catalogui.image.pullPolicy }}
           volumeMounts:
             - name: check-file
               mountPath: /check-file
@@ -91,7 +87,7 @@ spec:
               done
       containers:
         - image: "{{ .Values.catalogui.image.imageRegistry }}/{{ .Values.catalogui.image.repository }}:{{ .Values.catalogui.image.tag }}"
-          imagePullPolicy: {{ .Values.catalogui.pullPolicy }}
+          imagePullPolicy: {{ .Values.catalogui.image.pullPolicy }}
           name: {{ .Values.catalogui.image.name }}
           securityContext:
             allowPrivilegeEscalation: false
