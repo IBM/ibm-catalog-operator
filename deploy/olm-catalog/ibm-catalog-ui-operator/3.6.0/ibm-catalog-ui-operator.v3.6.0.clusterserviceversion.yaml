@@ -302,7 +302,7 @@ spec:
   maintainers:
   - email: support@ibm.com
     name: IBM Support
-  maturity: alpha
+  maturity: stable
   provider:
     name: IBM
   replaces: ibm-catalog-ui-operator.v3.5.0
