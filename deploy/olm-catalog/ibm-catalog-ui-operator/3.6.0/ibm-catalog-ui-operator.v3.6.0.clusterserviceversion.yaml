@@ -107,7 +107,7 @@ spec:
         path: catalogui
       - description: How many pods to run simultaneously
         displayName: Replica count
-        path: replicaCount        
+        path: replicaCount
       statusDescriptors:
       - description: Conditions contains the observed states of the Helm release
         displayName: Conditions
@@ -177,7 +177,7 @@ spec:
                       fieldPath: metadata.name
                 - name: OPERATOR_NAME
                   value: ibm-catalog-ui-operator
-                image: quay.io/opencloudio/ibm-catalog-ui-operator:3.6.0
+                image: quay.io/opencloudio/ibm-catalog-ui-operator:latest
                 imagePullPolicy: Always
                 name: ibm-catalog-ui-operator
                 resources: {}
@@ -302,7 +302,7 @@ spec:
   maintainers:
   - email: support@ibm.com
     name: IBM Support
-  maturity: alpha
+  maturity: stable
   provider:
     name: IBM
   replaces: ibm-catalog-ui-operator.v3.5.0
