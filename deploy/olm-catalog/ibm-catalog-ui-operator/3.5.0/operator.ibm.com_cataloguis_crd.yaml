@@ -29,12 +29,41 @@ spec:
         spec:
           properties:
             catalogui:
+              properties:
+                image:
+                  properties:
+                    name:
+                      type: string
+                    imageRegistry:
+                      type: string
+                    pullPolicy:
+                      type: string
+                    repository:
+                      type: string
+                    tag:
+                      type: string
+                  type: object
+                resources:
+                  type: object
+                  properties:
+                    limits:
+                      properties:
+                        cpu:
+                          type: string
+                        memory: 
+                          type: string
+                      type: object
+                    requests:
+                      properties:
+                        cpu:
+                          type: string
+                        memory: 
+                          type: string
+                      type: object
               type: object
-              x-kubernetes-preserve-unknown-fields: true
-          required:
-          - catalogui
+            replicaCount:
+              type: integer         
           type: object
-          x-kubernetes-preserve-unknown-fields: true
         status:
           properties:
             conditions:
@@ -69,8 +98,8 @@ spec:
       - metadata
       - spec
       type: object
-  version: v1alpha1
+  version: v1
   versions:
-  - name: v1alpha1
+  - name: v1
     served: true
     storage: true
