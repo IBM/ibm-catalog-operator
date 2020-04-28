@@ -33,7 +33,30 @@ catalogui:
       type: "string"
       immutable: false
       required: true
-  pullPolicy:
+  image:
+    name:
+      __metadata:
+        label: "Catalog Image Name"
+        description: "Image Name for Catalog UI Service"
+        type: "string"
+        required: false
+        immutable: false
+    imageRegistry:
+      __metadata:
+        name: "imageRegistry"
+        label: "Image Registry"
+        description: "catalogui.image.imageRegistry: Registry for the catalog ui image"
+        type: "string"
+        immutable: false
+        required: true
+    repository:
+      __metadata:
+        label: "Catalog Image Repository"
+        description: "Image Repository for Catalog UI Service"
+        type: "string"
+        required: false
+        immutable: false
+    pullPolicy:
     __metadata:
       label: "Catalog Image Pull Policy"
       description:  " Image Pull Policy for Catalog"
@@ -47,21 +70,6 @@ catalogui:
         value: "Always"
       - label: "Never"
         value: "Never"
-  image:
-    name:
-      __metadata:
-        label: "Catalog Image Name"
-        description: "Image Name for Catalog UI Service"
-        type: "string"
-        required: false
-        immutable: false
-    repository:
-      __metadata:
-        label: "Catalog Image Repository"
-        description: "Image Repository for Catalog UI Service"
-        type: "string"
-        required: false
-        immutable: false
     tag:
       __metadata:
         label: "Catalog Image Tag"
