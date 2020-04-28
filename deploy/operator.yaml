@@ -2,6 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ibm-catalog-ui-operator
+  labels:
+      name: ibm-catalog-ui-operator
+      app.kubernetes.io/instance: cataloguis.operator.ibm.com
+      app.kubernetes.io/managed-by: cataloguis.operator.ibm.com
+      app.kubernetes.io/name: cataloguis.operator.ibm.com
 spec:
   replicas: 1
   selector:
