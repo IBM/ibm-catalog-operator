@@ -60,7 +60,9 @@ spec:
                         memory: 
                           type: string
                       type: object
-              type: object         
+              type: object
+            replicaCount:
+              type: integer         
           type: object
         status:
           properties:
