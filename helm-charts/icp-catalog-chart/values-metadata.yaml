@@ -57,19 +57,19 @@ catalogui:
         required: false
         immutable: false
     pullPolicy:
-    __metadata:
-      label: "Catalog Image Pull Policy"
-      description:  " Image Pull Policy for Catalog"
-      type: "string"
-      immutable: false
-      required: true
-      options:
-      - label: "IfNotPresent"
-        value: "IfNotPresent"
-      - label: "Always"
-        value: "Always"
-      - label: "Never"
-        value: "Never"
+      __metadata:
+        label: "Catalog Image Pull Policy"
+        description:  " Image Pull Policy for Catalog"
+        type: "string"
+        immutable: false
+        required: true
+        options:
+        - label: "IfNotPresent"
+          value: "IfNotPresent"
+        - label: "Always"
+          value: "Always"
+        - label: "Never"
+          value: "Never"
     tag:
       __metadata:
         label: "Catalog Image Tag"
