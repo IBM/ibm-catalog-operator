@@ -46,3 +46,13 @@ spec:
             requests:
               cpu: 300m
               memory: 300Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 65534
+            allowPrivilegeEscalation: false
+            privileged: false
+            capabilities:
+              drop:
+              - ALL
