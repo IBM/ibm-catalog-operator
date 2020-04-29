@@ -9,6 +9,10 @@ metadata:
     component: "catalogui"
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service}}
+    app.kubernetes.io/instance: cataloguis.operator.ibm.com
+    app.kubernetes.io/managed-by: cataloguis.operator.ibm.com
+    app.kubernetes.io/name: {{ .Values.catalogui.commonname }}
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:

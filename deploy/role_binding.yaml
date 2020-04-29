@@ -2,6 +2,11 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: ibm-catalog-ui-operator
+  labels:
+      name: ibm-catalog-ui-operator
+      app.kubernetes.io/instance: cataloguis.operator.ibm.com
+      app.kubernetes.io/managed-by: cataloguis.operator.ibm.com
+      app.kubernetes.io/name: cataloguis.operator.ibm.com
 subjects:
 - kind: ServiceAccount
   name: ibm-catalog-ui-operator
@@ -14,6 +19,11 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: ibm-catalog-ui-operator
+  labels:
+      name: ibm-catalog-ui-operator
+      app.kubernetes.io/instance: cataloguis.operator.ibm.com
+      app.kubernetes.io/managed-by: cataloguis.operator.ibm.com
+      app.kubernetes.io/name: cataloguis.operator.ibm.com
 subjects:
 - kind: ServiceAccount
   name: ibm-catalog-ui-operator

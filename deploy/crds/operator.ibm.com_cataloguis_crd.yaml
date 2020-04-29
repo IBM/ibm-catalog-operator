@@ -3,7 +3,7 @@ kind: CustomResourceDefinition
 metadata:
   name: cataloguis.operator.ibm.com
   labels:
-      name: ibm-catalog-ui-operator
+      name: cataloguis.operator.ibm.com
       app.kubernetes.io/instance: cataloguis.operator.ibm.com
       app.kubernetes.io/managed-by: cataloguis.operator.ibm.com
       app.kubernetes.io/name: cataloguis.operator.ibm.com
