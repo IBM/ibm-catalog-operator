@@ -49,7 +49,6 @@ spec:
                       type: string
                   type: object
                 resources:
-                  type: object
                   properties:
                     limits:
                       properties:
@@ -65,6 +64,7 @@ spec:
                         memory: 
                           type: string
                       type: object
+                  type: object
               type: object
             replicaCount:
               type: integer         
