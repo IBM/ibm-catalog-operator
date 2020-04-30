@@ -62,7 +62,11 @@ spec:
     {{- end }}
       initContainers:
         - name: check-secret
+        {{- if .Values.catalogui.image.sha }}
+          image: "{{ .Values.catalogui.image.imageRegistry }}/{{ .Values.catalogui.image.repository }}@{{ .Values.catalogui.image.sha }}"
+        {{- else }}
           image: "{{ .Values.catalogui.image.imageRegistry }}/{{ .Values.catalogui.image.repository }}:{{ .Values.catalogui.image.tag }}"
+        {{- end }}
           imagePullPolicy: {{ .Values.catalogui.image.pullPolicy }}
           volumeMounts:
             - name: check-file
@@ -90,7 +94,11 @@ spec:
                 sleep 30
               done
       containers:
+      {{- if .Values.catalogui.image.sha }}
+        - image: "{{ .Values.catalogui.image.imageRegistry }}/{{ .Values.catalogui.image.repository }}@{{ .Values.catalogui.image.sha }}"
+      {{- else }}  
         - image: "{{ .Values.catalogui.image.imageRegistry }}/{{ .Values.catalogui.image.repository }}:{{ .Values.catalogui.image.tag }}"
+      {{- end }}    
           imagePullPolicy: {{ .Values.catalogui.image.pullPolicy }}
           name: {{ .Values.catalogui.image.name }}
           securityContext:

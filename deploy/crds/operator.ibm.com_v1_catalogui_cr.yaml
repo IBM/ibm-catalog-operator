@@ -14,6 +14,7 @@ spec:
       pullPolicy: IfNotPresent
       repository: icp-catalog-ui
       tag: 3.2.4
+      sha: "sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95"
     resources:
       limits:
         cpu: 300m

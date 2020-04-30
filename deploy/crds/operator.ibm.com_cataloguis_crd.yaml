@@ -47,6 +47,8 @@ spec:
                       type: string
                     tag:
                       type: string
+                    sha:
+                      type: string
                   type: object
                 resources:
                   properties:

@@ -22,7 +22,8 @@ metadata:
                 "imageRegistry": "quay.io/opencloudio",
                 "pullPolicy": "IfNotPresent",
                 "repository": "icp-catalog-ui",
-                "tag": "3.2.4"
+                "tag": "3.2.4",
+                "sha": "sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95"
               },
               "resources": {
                 "limits": {
@@ -73,7 +74,7 @@ metadata:
     capabilities: Basic Install
     categories: Developer Tools
     certified: "false"
-    containerImage: quay.io/opencloudio/ibm-catalog-ui-operator:3.6.0
+    containerImage: quay.io/opencloudio/ibm-catalog-ui-operator:latest
     createdAt: "2020-03-24T01:00:00Z"
     description: CatalogUI provides Catalog UI service for Helm charts management.
     repository: https://github.com/IBM/ibm-catalog-ui-operator
