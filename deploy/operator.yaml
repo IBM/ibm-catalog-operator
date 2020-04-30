@@ -68,7 +68,6 @@ spec:
             readOnlyRootFilesystem: true
             runAsNonRoot: true
             runAsUser: 65534
-            allowPrivilegeEscalation: false
             privileged: false
             capabilities:
               drop:

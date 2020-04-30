@@ -8,7 +8,13 @@ metadata:
           "apiVersion": "operator.ibm.com/v1",
           "kind": "CatalogUI",
           "metadata": {
-            "name": "catalog-ui"
+            "labels": {
+              "app.kubernetes.io/instance": "cataloguis.operator.ibm.com",
+              "app.kubernetes.io/managed-by": "cataloguis.operator.ibm.com",
+              "app.kubernetes.io/name": "cataloguis.operator.ibm.com",
+              "name": "cataloguis.operator.ibm.com"
+            },
+            "name": "cataloguis.operator.ibm.com"
           },
           "spec": {
             "catalogui": {
@@ -62,7 +68,7 @@ metadata:
               }
             ]
           }
-        }
+        }        
       ]
     capabilities: Basic Install
     categories: Developer Tools
@@ -163,8 +169,22 @@ spec:
                 productName: IBM Cloud Platform Common Services
                 productVersion: 3.3.0
               labels:
+                app.kubernetes.io/instance: cataloguis.operator.ibm.com
+                app.kubernetes.io/managed-by: cataloguis.operator.ibm.com
+                app.kubernetes.io/name: cataloguis.operator.ibm.com
                 name: ibm-catalog-ui-operator
             spec:
+              affinity:
+                nodeAffinity:
+                  requiredDuringSchedulingIgnoredDuringExecution:
+                    nodeSelectorTerms:
+                    - matchExpressions:
+                      - key: kubernetes.io/arch
+                        operator: In
+                        values:
+                        - amd64
+                        - ppc64le
+                        - s390x
               containers:
               - env:
                 - name: WATCH_NAMESPACE
@@ -180,7 +200,22 @@ spec:
                 image: quay.io/opencloudio/ibm-catalog-ui-operator:latest
                 imagePullPolicy: Always
                 name: ibm-catalog-ui-operator
-                resources: {}
+                resources:
+                  limits:
+                    cpu: 300m
+                    memory: 300Mi
+                  requests:
+                    cpu: 300m
+                    memory: 300Mi
+                securityContext:
+                  allowPrivilegeEscalation: false
+                  capabilities:
+                    drop:
+                    - ALL
+                  privileged: false
+                  readOnlyRootFilesystem: true
+                  runAsNonRoot: true
+                  runAsUser: 65534
               serviceAccountName: ibm-catalog-ui-operator
       permissions:
       - rules:
