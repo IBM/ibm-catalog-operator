@@ -3,6 +3,11 @@ kind: Role
 metadata:
   creationTimestamp: null
   name: ibm-catalog-ui-operator
+  labels:
+      name: ibm-catalog-ui-operator
+      app.kubernetes.io/instance: cataloguis.operator.ibm.com
+      app.kubernetes.io/managed-by: cataloguis.operator.ibm.com
+      app.kubernetes.io/name: cataloguis.operator.ibm.com
 rules:
 - apiGroups:
   - ""
@@ -109,6 +114,11 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: ibm-catalog-ui-operator
+  labels:
+      name: ibm-catalog-ui-operator
+      app.kubernetes.io/instance: cataloguis.operator.ibm.com
+      app.kubernetes.io/managed-by: cataloguis.operator.ibm.com
+      app.kubernetes.io/name: cataloguis.operator.ibm.com
 rules:
 - apiGroups:
   - rbac.authorization.k8s.io

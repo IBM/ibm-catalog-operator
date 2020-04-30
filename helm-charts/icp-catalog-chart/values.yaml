@@ -16,7 +16,6 @@ catalogui:
     repository: icp-catalog-ui
     tag: 3.2.4
   ingresspath: /catalog/
-  nodeSelector: {}
   resources:
     limits:
       cpu: 300m

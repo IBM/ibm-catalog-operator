@@ -9,6 +9,10 @@ metadata:
     component: "catalogui"
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service}}
+    app.kubernetes.io/instance: cataloguis.operator.ibm.com
+    app.kubernetes.io/managed-by: cataloguis.operator.ibm.com
+    app.kubernetes.io/name: {{ .Values.catalogui.commonname }}
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -24,6 +28,10 @@ spec:
         release: {{ .Release.Name }}
         heritage: {{ .Release.Service}}
         k8s-app: {{ .Values.catalogui.commonname }}
+        app.kubernetes.io/instance: cataloguis.operator.ibm.com
+        app.kubernetes.io/managed-by: cataloguis.operator.ibm.com
+        app.kubernetes.io/name: {{ .Values.catalogui.commonname }}
+        helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
       annotations:
         seccomp.security.alpha.kubernetes.io/pod: docker/default
         productName: IBM Cloud Platform Common Services
@@ -37,10 +45,6 @@ spec:
       hostNetwork: false
       hostPID: false
       hostIPC: false
-    {{- if .Values.catalogui.nodeSelector }}
-      nodeSelector:
-{{ toYaml .Values.catalogui.nodeSelector | indent 8 }}
-    {{- end }}
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:

@@ -1,7 +1,12 @@
 apiVersion: operator.ibm.com/v1
 kind: CatalogUI
 metadata:
-  name: catalog-ui
+  name: cataloguis.operator.ibm.com
+  labels:
+      name: cataloguis.operator.ibm.com
+      app.kubernetes.io/instance: cataloguis.operator.ibm.com
+      app.kubernetes.io/managed-by: cataloguis.operator.ibm.com
+      app.kubernetes.io/name: cataloguis.operator.ibm.com
 spec:
   catalogui:
     image:

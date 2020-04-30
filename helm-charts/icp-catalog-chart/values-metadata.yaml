@@ -5,14 +5,6 @@ catalogui:
   __metadata:
     label: "Multicloud Manager Catalog"
     description: "Configuration for Multicloud Manager Catalog UI Service"
-  nodeSelector:
-    master:
-      __metadata:
-        label: "Node selector for management node"
-        description: "Determines if the component should be scheduled on the management node"
-        type: "string"
-        required: false
-        immutable: false
   tolerations:
     __metadata:
       name: "ui.tolerations"
@@ -33,20 +25,6 @@ catalogui:
       type: "string"
       immutable: false
       required: true
-  pullPolicy:
-    __metadata:
-      label: "Catalog Image Pull Policy"
-      description:  " Image Pull Policy for Catalog"
-      type: "string"
-      immutable: false
-      required: true
-      options:
-      - label: "IfNotPresent"
-        value: "IfNotPresent"
-      - label: "Always"
-        value: "Always"
-      - label: "Never"
-        value: "Never"
   image:
     name:
       __metadata:
@@ -55,6 +33,14 @@ catalogui:
         type: "string"
         required: false
         immutable: false
+    imageRegistry:
+      __metadata:
+        name: "imageRegistry"
+        label: "Image Registry"
+        description: "catalogui.image.imageRegistry: Registry for the catalog ui image"
+        type: "string"
+        immutable: false
+        required: true
     repository:
       __metadata:
         label: "Catalog Image Repository"
@@ -62,6 +48,20 @@ catalogui:
         type: "string"
         required: false
         immutable: false
+    pullPolicy:
+      __metadata:
+        label: "Catalog Image Pull Policy"
+        description:  " Image Pull Policy for Catalog"
+        type: "string"
+        immutable: false
+        required: true
+        options:
+        - label: "IfNotPresent"
+          value: "IfNotPresent"
+        - label: "Always"
+          value: "Always"
+        - label: "Never"
+          value: "Never"
     tag:
       __metadata:
         label: "Catalog Image Tag"
