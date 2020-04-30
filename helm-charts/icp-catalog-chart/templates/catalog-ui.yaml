@@ -45,10 +45,6 @@ spec:
       hostNetwork: false
       hostPID: false
       hostIPC: false
-    {{- if .Values.catalogui.nodeSelector }}
-      nodeSelector:
-{{ toYaml .Values.catalogui.nodeSelector | indent 8 }}
-    {{- end }}
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:

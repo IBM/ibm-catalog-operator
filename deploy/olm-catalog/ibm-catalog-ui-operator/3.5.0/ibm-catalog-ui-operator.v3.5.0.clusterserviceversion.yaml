@@ -5,25 +5,33 @@ metadata:
     alm-examples: |-
       [
         {
-          "apiVersion": "operator.ibm.com/v1",
+          "apiVersion": "operator.ibm.com/v1alpha1",
           "kind": "CatalogUI",
           "metadata": {
-            "labels": {
-              "app.kubernetes.io/instance": "cataloguis.operator.ibm.com",
-              "app.kubernetes.io/managed-by": "cataloguis.operator.ibm.com",
-              "app.kubernetes.io/name": "cataloguis.operator.ibm.com",
-              "name": "cataloguis.operator.ibm.com"
-            },
-            "name": "cataloguis.operator.ibm.com"
+            "name": "catalog-ui"
           },
           "spec": {
             "catalogui": {
+              "commonname": "catalog-ui",
+              "env": {
+                "catalogApiRouteUrl": "https://icp-management-ingress:443/helm-api",
+                "cfcRouterUrl": "https://icp-management-ingress:443",
+                "hcmSearchApiUrl": "https://search-search-api:4010/searchapi",
+                "hcmUiApiUrl": "https://mcm-312-ibm-mcm-prod-mcmuiapi:4000/hcmuiapi",
+                "platformidentityproviderurl": "https://icp-management-ingress:443/idprovider",
+                "wlpredirecturl": "http://localhost:3000/auth/liberty/callback"
+              },
+              "healthcheck": {
+                "enabled": false
+              },
               "image": {
-                "imageRegistry": "quay.io/opencloudio",
-                "pullPolicy": "IfNotPresent",
-                "repository": "icp-catalog-ui",
+                "name": "catalog-ui",
+                "repository": "quay.io/opencloudio/icp-catalog-ui",
                 "tag": "3.2.4"
               },
+              "ingresspath": "/catalog/",
+              "nodeSelector": {},
+              "pullPolicy": "Always",
               "resources": {
                 "limits": {
                   "cpu": "300m",
@@ -33,9 +41,31 @@ metadata:
                   "cpu": "300m",
                   "memory": "300Mi"
                 }
-              }
-            },
-            "replicaCount": 1
+              },
+              "runAsUser": 65534,
+              "secretKeyRef": {
+                "clientIdSecretKey": "WLP_CLIENT_ID",
+                "clientIdSecretName": "platform-oidc-credentials",
+                "clientSecretSecretKey": "WLP_CLIENT_SECRET"
+              },
+              "service": {
+                "name": "catalog-ui",
+                "port": 4000,
+                "servicePort": 4000,
+                "targetPort": 4000
+              },
+              "tolerations": [
+                {
+                  "effect": "NoSchedule",
+                  "key": "dedicated",
+                  "operator": "Exists"
+                },
+                {
+                  "key": "CriticalAddonsOnly",
+                  "operator": "Exists"
+                }
+              ]
+            }
           }
         }
       ]
@@ -135,22 +165,8 @@ spec:
                 productName: IBM Cloud Platform Common Services
                 productVersion: 3.3.0
               labels:
-                app.kubernetes.io/instance: cataloguis.operator.ibm.com
-                app.kubernetes.io/managed-by: cataloguis.operator.ibm.com
-                app.kubernetes.io/name: cataloguis.operator.ibm.com
                 name: ibm-catalog-ui-operator
             spec:
-              affinity:
-                nodeAffinity:
-                  requiredDuringSchedulingIgnoredDuringExecution:
-                    nodeSelectorTerms:
-                    - matchExpressions:
-                      - key: kubernetes.io/arch
-                        operator: In
-                        values:
-                        - amd64
-                        - ppc64le
-                        - s390x
               containers:
               - env:
                 - name: WATCH_NAMESPACE
@@ -163,25 +179,10 @@ spec:
                       fieldPath: metadata.name
                 - name: OPERATOR_NAME
                   value: ibm-catalog-ui-operator
-                image: quay.io/opencloudio/ibm-catalog-ui-operator:latest
+                image: quay.io/opencloudio/ibm-catalog-ui-operator:3.5.0
                 imagePullPolicy: Always
                 name: ibm-catalog-ui-operator
-                resources:
-                  limits:
-                    cpu: 300m
-                    memory: 300Mi
-                  requests:
-                    cpu: 300m
-                    memory: 300Mi
-                securityContext:
-                  allowPrivilegeEscalation: false
-                  capabilities:
-                    drop:
-                    - ALL
-                  privileged: false
-                  readOnlyRootFilesystem: true
-                  runAsNonRoot: true
-                  runAsUser: 65534
+                resources: {}
               serviceAccountName: ibm-catalog-ui-operator
       permissions:
       - rules:
