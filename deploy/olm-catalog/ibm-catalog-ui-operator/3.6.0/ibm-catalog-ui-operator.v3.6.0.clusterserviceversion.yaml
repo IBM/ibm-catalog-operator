@@ -22,8 +22,8 @@ metadata:
                 "imageRegistry": "quay.io/opencloudio",
                 "pullPolicy": "IfNotPresent",
                 "repository": "icp-catalog-ui",
-                "tag": "3.2.4",
-                "sha": "sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95"
+                "sha": "sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95",
+                "tag": "3.2.4"
               },
               "resources": {
                 "limits": {
@@ -145,14 +145,6 @@ spec:
           - patch
           - update
           - watch
-        - apiGroups:
-          - security.openshift.io
-          resourceNames:
-          - privileged
-          resources:
-          - securitycontextconstraints
-          verbs:
-          - use
         serviceAccountName: ibm-catalog-ui-operator
       deployments:
       - name: ibm-catalog-ui-operator
@@ -208,15 +200,6 @@ spec:
                   requests:
                     cpu: 300m
                     memory: 300Mi
-                securityContext:
-                  allowPrivilegeEscalation: false
-                  capabilities:
-                    drop:
-                    - ALL
-                  privileged: false
-                  readOnlyRootFilesystem: true
-                  runAsNonRoot: true
-                  runAsUser: 65534
               serviceAccountName: ibm-catalog-ui-operator
       permissions:
       - rules:

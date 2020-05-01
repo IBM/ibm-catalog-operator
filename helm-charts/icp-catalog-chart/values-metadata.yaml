@@ -62,6 +62,13 @@ catalogui:
           value: "Always"
         - label: "Never"
           value: "Never"
+    sha:
+      __metadata:
+        label: "Catalog Image SHA"
+        description: "SHA of Catalog Image "
+        type: "string"
+        required: false
+        immutable: false          
     tag:
       __metadata:
         label: "Catalog Image Tag"
