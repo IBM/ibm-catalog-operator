@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ibm-catalog-ui-operator
+  name: ibm-catalog-ui-operator #test comment
   labels:
       name: ibm-catalog-ui-operator
       app.kubernetes.io/instance: cataloguis.operator.ibm.com
