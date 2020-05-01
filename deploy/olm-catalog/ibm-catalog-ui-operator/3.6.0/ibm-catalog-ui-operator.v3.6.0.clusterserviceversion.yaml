@@ -167,17 +167,6 @@ spec:
                 app.kubernetes.io/name: cataloguis.operator.ibm.com
                 name: ibm-catalog-ui-operator
             spec:
-              affinity:
-                nodeAffinity:
-                  requiredDuringSchedulingIgnoredDuringExecution:
-                    nodeSelectorTerms:
-                    - matchExpressions:
-                      - key: kubernetes.io/arch
-                        operator: In
-                        values:
-                        - amd64
-                        - ppc64le
-                        - s390x
               containers:
               - env:
                 - name: WATCH_NAMESPACE
@@ -193,13 +182,7 @@ spec:
                 image: quay.io/opencloudio/ibm-catalog-ui-operator:latest
                 imagePullPolicy: Always
                 name: ibm-catalog-ui-operator
-                resources:
-                  limits:
-                    cpu: 300m
-                    memory: 300Mi
-                  requests:
-                    cpu: 300m
-                    memory: 300Mi
+                resources: {}
               serviceAccountName: ibm-catalog-ui-operator
       permissions:
       - rules:
