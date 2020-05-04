@@ -58,16 +58,16 @@ spec:
               value: "ibm-catalog-ui-operator"
           resources:
             limits:
-              cpu: 300m
-              memory: 300Mi
+              cpu: 150m
+              memory: 150Mi
             requests:
-              cpu: 300m
-              memory: 300Mi
+              cpu: 150m
+              memory: 150Mi
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
             runAsNonRoot: true
-            runAsUser: 65534
+            runAsUser: 1000550000
             privileged: false
             capabilities:
               drop:
