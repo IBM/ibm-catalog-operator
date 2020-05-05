@@ -5,7 +5,7 @@ metadata:
     alm-examples: |-
       [
         {
-          "apiVersion": "operator.ibm.com/v1",
+          "apiVersion": "operator.ibm.com/v1alpha1",
           "kind": "CatalogUI",
           "metadata": {
             "labels": {
@@ -122,7 +122,7 @@ spec:
       - description: Deployed Release shows the manifest of the deployed Helm release
         displayName: Deployed Release
         path: deployedRelease
-      version: v1
+      version: v1alpha1
   description: CatalogUI provides Catalog UI service for Helm charts management
   displayName: IBM Catalog UI Operator
   icon:
