@@ -76,12 +76,7 @@ metadata:
     certified: "false"
     containerImage: quay.io/opencloudio/ibm-catalog-ui-operator:latest
     createdAt: "2020-03-24T01:00:00Z"
-    description: "#IBM Catalog UI Operator\n> **Important:** Do not install this operator directly. Only install this operator using the IBM Common Services Operator. For more information about installing this operator and other Common Services operators, see [Installer documentation](http://ibm.biz/cpcs_opinstall). If you are using this operator as part of an IBM Cloud Pak, see the documentation for that IBM Cloud Pak to learn more about how to install and use the operator service. For more information about IBM Cloud Paks, see [IBM Cloud Paks that use Common Services](http://ibm.biz/cpcs_cloudpaks).
-    \nCatalogUI provides Catalog UI service for Helm charts management.
-    \n\n## Supported platforms\n\n### Platforms\n- Red Hat OpenShift Container Plataform 4.x\n\n### Operating Systems\n- Red Hat Enterprise Linux CoreOS
-    \n\n## Operator versions\n- 3.6.0
-    \n\n## Prerequisites\n\n[1.] Red Hat OpenShift Container Plataform 4.x installed\n[2.] Cluster Admin role for installation\n[3.] [IBM Cert Manager Operator](https://github.com/IBM/ibm-cert-manager-operator)\n[4.] [IBM MongoDB Operator](https://github.com/IBM/ibm-mongodb-operator)\n[5.] [IBM IAM Operator](https://github.com/IBM/ibm-iam-operator)\n[6.] [IBM Management Ingress Operator](https://github.com/IBM/ibm-management-ingress-operator)\n[7.] [IBM Platform API Operator](https://github.com/IBM/ibm-platform-api-operator)\n[8.] [IBM Helm API Operator](https://github.com/IBM/ibm-helm-api-operator)\n[9.] [IBM Helm Repo Operator](https://github.com/IBM/ibm-helm-repo-operator)
-    \n\n## Documentation\nFor installation and configuration, see links from **Important** section."
+    description: CatalogUI provides Catalog UI service for Helm charts management.
     repository: https://github.com/IBM/ibm-catalog-ui-operator
     support: IBM
   name: ibm-catalog-ui-operator.v3.6.0
@@ -90,7 +85,12 @@ spec:
   apiservicedefinitions: {}
   customresourcedefinitions:
     owned:
-    - description: CatalogUI is the Schema for the cataloguis API
+    - description: "#IBM Catalog UI Operator\n> **Important:** Do not install this operator directly. Only install this operator using the IBM Common Services Operator. For more information about installing this operator and other Common Services operators, see [Installer documentation](http://ibm.biz/cpcs_opinstall). If you are using this operator as part of an IBM Cloud Pak, see the documentation for that IBM Cloud Pak to learn more about how to install and use the operator service. For more information about IBM Cloud Paks, see [IBM Cloud Paks that use Common Services](http://ibm.biz/cpcs_cloudpaks).
+    \nCatalogUI provides Catalog UI service for Helm charts management.
+    \n\n## Supported platforms\n\n### Platforms\n- Red Hat OpenShift Container Platform 4.3+\n\n### Operating Systems\n- Red Hat Enterprise Linux CoreOS
+    \n\n## Operator versions\n- 3.6.0
+    \n\n## Prerequisites\n\n[1.] Red Hat OpenShift Container Platform 4.3+ installed\n[2.] Cluster Admin role for installation\n[3.] [IBM Cert Manager Operator](https://github.com/IBM/ibm-cert-manager-operator)\n[4.] [IBM MongoDB Operator](https://github.com/IBM/ibm-mongodb-operator)\n[5.] [IBM IAM Operator](https://github.com/IBM/ibm-iam-operator)\n[6.] [IBM Management Ingress Operator](https://github.com/IBM/ibm-management-ingress-operator)\n[7.] [IBM Platform API Operator](https://github.com/IBM/ibm-platform-api-operator)\n[8.] [IBM Helm API Operator](https://github.com/IBM/ibm-helm-api-operator)\n[9.] [IBM Helm Repo Operator](https://github.com/IBM/ibm-helm-repo-operator)
+    \n\n## Documentation\nFor installation and configuration, see links from **Important** section."
       displayName: CatalogUI
       kind: CatalogUI
       name: cataloguis.operator.ibm.com
