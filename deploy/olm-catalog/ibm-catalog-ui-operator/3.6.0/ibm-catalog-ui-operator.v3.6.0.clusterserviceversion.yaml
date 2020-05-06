@@ -81,7 +81,7 @@ metadata:
     \n\n## Supported platforms\n\n### Platforms\n- Red Hat OpenShift Container Plataform 4.x\n\n### Operating Systems\n- Red Hat Enterprise Linux CoreOS
     \n\n## Operator versions\n- 3.6.0
     \n\n## Prerequisites\n\n[1.] Red Hat OpenShift Container Plataform 4.x installed\n[2.] Cluster Admin role for installation\n[3.] [IBM Cert Manager Operator](https://github.com/IBM/ibm-cert-manager-operator)\n[4.] [IBM MongoDB Operator](https://github.com/IBM/ibm-mongodb-operator)\n[5.] [IBM IAM Operator](https://github.com/IBM/ibm-iam-operator)\n[6.] [IBM Management Ingress Operator](https://github.com/IBM/ibm-management-ingress-operator)\n[7.] [IBM Platform API Operator](https://github.com/IBM/ibm-platform-api-operator)\n[8.] [IBM Helm API Operator](https://github.com/IBM/ibm-helm-api-operator)\n[9.] [IBM Helm Repo Operator](https://github.com/IBM/ibm-helm-repo-operator)
-    \n\n## Documentation\nFor installation and configuration, see [IBM Knowledge Center link]."
+    \n\n## Documentation\nFor installation and configuration, see links from **Important** section."
     repository: https://github.com/IBM/ibm-catalog-ui-operator
     support: IBM
   name: ibm-catalog-ui-operator.v3.6.0
