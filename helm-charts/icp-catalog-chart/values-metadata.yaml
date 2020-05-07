@@ -65,14 +65,14 @@ catalogui:
     sha:
       __metadata:
         label: "Catalog image digest"
-        description: "Catalog image digest"
+        description: "Catalog image digest."
         type: "string"
         required: false
         immutable: false
     tag:
       __metadata:
         label: "Catalog image tag"
-        description: "Catalog image tag"
+        description: "Catalog image tag."
         type: "string"
         required: false
         immutable: false

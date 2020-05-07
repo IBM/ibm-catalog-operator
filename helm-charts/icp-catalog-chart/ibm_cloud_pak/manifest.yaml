@@ -1,0 +1,35 @@
+images:
+- image: ibm-catalog-ui-operator:3.5.0
+  references:
+  - repository: ibm-catalog-ui-operator:3.5.0
+    pull-repository: quay.io/opencloudio/ibm-catalog-ui-operator:3.5.0
+    platform:
+      os: linux
+      arch: amd64
+  - repository: ibm-catalog-ui-operator:3.5.0
+    pull-repository: quay.io/opencloudio/ibm-catalog-ui-operator:3.5.0
+    platform:
+      os: linux
+      arch: ppc64le
+  - repository: ibm-catalog-ui-operator:3.5.0
+    pull-repository: quay.io/opencloudio/ibm-catalog-ui-operator:3.5.0
+    platform:
+      os: linux
+      arch: s390x
+- image: icp-catalog-ui@sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95
+  references:
+  - repository: icp-catalog-ui@sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95
+    pull-repository: quay.io/opencloudio/icp-catalog-ui@sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95
+    platform:
+      os: linux
+      arch: amd64
+  - repository: icp-catalog-ui@sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95
+    pull-repository: quay.io/opencloudio/icp-catalog-ui@sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95
+    platform:
+      os: linux
+      arch: ppc64le
+  - repository: icp-catalog-ui@sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95
+    pull-repository: quay.io/opencloudio/icp-catalog-ui@sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95
+    platform:
+      os: linux
+      arch: s390x
