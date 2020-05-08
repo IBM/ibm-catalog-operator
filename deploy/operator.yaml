@@ -56,6 +56,10 @@ spec:
                   fieldPath: metadata.name
             - name: OPERATOR_NAME
               value: "ibm-catalog-ui-operator"
+            - name: OPERAND_CATALOG_UI_IMAGE
+              value: "quay.io/opencloudio/icp-catalog-ui@sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95"
+            - name: OPERAND_RUN_AS_USER
+              value: "1000630000"
           resources:
             limits:
               cpu: 150m

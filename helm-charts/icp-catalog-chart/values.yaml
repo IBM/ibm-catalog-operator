@@ -11,11 +11,8 @@ catalogui:
     enabled: false
   image:
     name: catalog-ui
-    imageRegistry: quay.io/opencloudio
     pullPolicy: IfNotPresent
-    repository: icp-catalog-ui
-    tag: 3.2.4
-    sha: "sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95"
+    repository: quay.io/opencloudio/icp-catalog-ui@sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95
   ingresspath: /catalog/
   resources:
     limits:
@@ -24,7 +21,7 @@ catalogui:
     requests:
       cpu: 300m
       memory: 300Mi
-  runAsUser: 1000550000
+  runAsUser: 1000630000
   secretKeyRef:
     clientIdSecretKey: WLP_CLIENT_ID
     clientIdSecretName: platform-oidc-credentials

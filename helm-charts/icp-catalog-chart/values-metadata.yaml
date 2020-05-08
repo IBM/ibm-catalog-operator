@@ -33,14 +33,6 @@ catalogui:
         type: "string"
         required: false
         immutable: false
-    imageRegistry:
-      __metadata:
-        name: "imageRegistry"
-        label: "Image Registry"
-        description: "catalogui.image.imageRegistry: Registry for the catalog ui image"
-        type: "string"
-        immutable: false
-        required: true
     repository:
       __metadata:
         label: "Catalog Image Repository"
@@ -62,20 +54,6 @@ catalogui:
           value: "Always"
         - label: "Never"
           value: "Never"
-    sha:
-      __metadata:
-        label: "Catalog image digest"
-        description: "Catalog image digest."
-        type: "string"
-        required: false
-        immutable: false
-    tag:
-      __metadata:
-        label: "Catalog image tag"
-        description: "Catalog image tag."
-        type: "string"
-        required: false
-        immutable: false
   resources:
     limits:
       cpu:
