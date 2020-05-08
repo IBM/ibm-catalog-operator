@@ -1,20 +1,15 @@
 apiVersion: operator.ibm.com/v1alpha1
 kind: CatalogUI
 metadata:
-  name: cataloguis.operator.ibm.com
+  name: catalog-ui
+  annotations:
+    helm.operator-sdk/upgrade-force: "True"
   labels:
-      name: cataloguis.operator.ibm.com
-      app.kubernetes.io/instance: cataloguis.operator.ibm.com
-      app.kubernetes.io/managed-by: cataloguis.operator.ibm.com
-      app.kubernetes.io/name: cataloguis.operator.ibm.com
+    app.kubernetes.io/instance: cataloguis.operator.ibm.com
+    app.kubernetes.io/managed-by: cataloguis.operator.ibm.com
+    app.kubernetes.io/name: catalog-ui
 spec:
   catalogui:
-    image:
-      imageRegistry: quay.io/opencloudio
-      pullPolicy: IfNotPresent
-      repository: icp-catalog-ui
-      tag: 3.2.4
-      sha: "sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95"
     resources:
       limits:
         cpu: 300m
