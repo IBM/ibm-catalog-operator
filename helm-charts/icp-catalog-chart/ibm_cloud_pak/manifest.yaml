@@ -33,3 +33,20 @@ images:
     platform:
       os: linux
       arch: s390x
+- image: icp-catalog-ui:3.2.5
+  references:
+  - repository: icp-catalog-ui:3.2.5
+    pull-repository: quay.io/opencloudio/icp-catalog-ui:3.2.5
+    platform:
+      os: linux
+      arch: amd64
+  - repository: icp-catalog-ui:3.2.5
+    pull-repository: quay.io/opencloudio/icp-catalog-ui:3.2.5
+    platform:
+      os: linux
+      arch: ppc64le
+  - repository: icp-catalog-ui:3.2.5
+    pull-repository: quay.io/opencloudio/icp-catalog-ui:3.2.5
+    platform:
+      os: linux
+      arch: s390x
