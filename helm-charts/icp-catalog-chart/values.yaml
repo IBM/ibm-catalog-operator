@@ -21,7 +21,6 @@ catalogui:
     requests:
       cpu: 300m
       memory: 300Mi
-  runAsUser: 1000630000
   secretKeyRef:
     clientIdSecretKey: WLP_CLIENT_ID
     clientIdSecretName: platform-oidc-credentials

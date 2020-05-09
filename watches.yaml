@@ -5,4 +5,3 @@
   chart: helm-charts/icp-catalog-chart
   overrideValues:
     catalogui.image.repository: ${OPERAND_CATALOG_UI_IMAGE}
-    catalogui.runAsUser: ${OPERAND_RUN_AS_USER}

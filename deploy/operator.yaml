@@ -57,9 +57,7 @@ spec:
             - name: OPERATOR_NAME
               value: "ibm-catalog-ui-operator"
             - name: OPERAND_CATALOG_UI_IMAGE
-              value: "quay.io/opencloudio/icp-catalog-ui@sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95"
-            - name: OPERAND_RUN_AS_USER
-              value: "1000630000"
+              value: "quay.io/opencloudio/icp-catalog-ui@sha256:db535688d5853179e9f0c7c8bf7c83553f418025b181478c3509e96c95e7f86d"
           resources:
             limits:
               cpu: 150m
@@ -71,7 +69,6 @@ spec:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
             runAsNonRoot: true
-            runAsUser: 1000550000
             privileged: false
             capabilities:
               drop:
