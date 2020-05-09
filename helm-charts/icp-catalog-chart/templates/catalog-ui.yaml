@@ -40,6 +40,7 @@ spec:
         clusterhealth.ibm.com/dependencies: "auth-idp, helm-api, helm-repo, platform-api, platform-header"
     spec:
       serviceAccount: ibm-catalog-ui-operand
+      serviceAccountName: ibm-catalog-ui-operand
       terminationGracePeriodSeconds: 60
       hostNetwork: false
       hostPID: false
@@ -72,7 +73,6 @@ spec:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
             runAsNonRoot: true
-            runAsUser: {{ .Values.catalogui.runAsUser }}
             privileged: false
             capabilities:
               drop:
@@ -93,7 +93,6 @@ spec:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
             runAsNonRoot: true
-            runAsUser: {{ .Values.catalogui.runAsUser }}
             privileged: false
             capabilities:
               drop:

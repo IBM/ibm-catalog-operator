@@ -188,10 +188,3 @@ catalogui:
           type: "boolean"
           immutable: false
           required: false
-  runAsUser:
-    __metadata:
-      label: "Run as User"
-      description: "What user to run as"
-      type: "string"
-      immutable: false
-      required: false
