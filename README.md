@@ -6,60 +6,70 @@ Operator used to manager IBM Catalog UI service. The Catalag UI service provides
 
 ## Supported platforms
 
-### Platforms
+Red Hat OpenShift Container Platform 4.3 or newer installed on one of the following platforms:
 
-- Red Hat OpenShift Container Plataform 4.x
-
-### Operating Systems
-
-- Red Hat Enterprise Linux CoreOS
+- Linux x86_64
+- Linux on Power (ppc64le)
+- Linux on IBM Z and LinuxONE
 
 ## Operator versions
 
+- 3.5.0
 - 3.6.0
 
 ## Prerequisites
 
-1. Red Hat OpenShift Container Plataform 4.x installed
-1. Cluster Admin role for installation
-1. [IBM Cert Manager Operator](https://github.com/IBM/ibm-cert-manager-operator)
-1. [IBM MongoDB Operator](https://github.com/IBM/ibm-mongodb-operator)
-1. [IBM IAM Operator](https://github.com/IBM/ibm-iam-operator)
-1. [IBM Management Ingress Operator](https://github.com/IBM/ibm-management-ingress-operator)
-1. [IBM Platform API Operator](https://github.com/IBM/ibm-platform-api-operator)
-1. [IBM Helm API Operator](https://github.com/IBM/ibm-helm-api-operator)
-1. [IBM Helm Repo Operator](https://github.com/IBM/ibm-helm-repo-operator)
+Before you install this operator, you need to first install the operator dependencies and prerequisites:
+
+- For the list of operator dependencies, see the IBM Knowledge Center [Common Services dependencies documentation](http://ibm.biz/cpcs_opdependencies).
+
+- For the list of prerequisites for installing the operator, see the IBM Knowledge Center [Preparing to install services documentation](http://ibm.biz/cpcs_opinstprereq).
 
 ## Documentation
 
-For installation and configuration, see [IBM Knowledge Center link].
+To install the operator with the IBM Common Services Operator follow the the installation and configuration instructions within the IBM Knowledge Center.
 
-### Developer guide
+- If you are using the operator as part of an IBM Cloud Pak, see the documentation for that IBM Cloud Pak. For a list of IBM Cloud Paks, see [IBM Cloud Paks that use Common Services](http://ibm.biz/cpcs_cloudpaks).
+- If you are using the operator with an IBM Containerized Software, see the IBM Cloud Platform Common Services Knowledge Center [Installer documentation](http://ibm.biz/cpcs_opinstall).
+
+## SecurityContextConstraints Requirements
+
+The Catalog UI service supports running with the OpenShift Container Platform 4.3 default restricted Security Context Constraints (SCCs).
+
+For more information about the OpenShift Container Platform Security Context Constraints, see [Managing Security Context Constraints](https://docs.openshift.com/container-platform/4.3/authentication/managing-security-context-constraints.html).
+
+## Developer guide
 
 Information about building and testing the operator.
 
-#### Cloning the operator repository
+### Quick start guide
+
+Use the following quick start commands for building and testing the operator:
+
+Cloning the operator repository
 ```
 # git clone git@github.com:IBM/ibm-catalog-ui-operator.git
 # cd ibm-catalog-ui-operator
 ```
 
-#### Building the operator image
+Building the operator image
 ```
 # make build
 ```
 
-#### Installing the operator 
+Installing the operator 
 ```
 # make install
 ```
 
-#### Uninstalling the operator
+Uninstalling the operator
 ```
 # make uninstall
 ```
 
-#### Debugging the operator
+### Debugging guide
+
+Use the following commands to debug the operator:
 
 Check the Cluster Service Version (CSV) installation status
 ```
@@ -79,6 +89,6 @@ Check the operator status and log
 # oc logs -f $(oc get po -l name=ibm-catalog-ui-operator -o name)
 ```
 
-#### End-to-End testing using Operand Deployment Lifecycle Manager
+### End-to-End testing
 
-See [ODLM guide](https://github.com/IBM/operand-deployment-lifecycle-manager/blob/master/docs/install/common-service-integration.md#end-to-end-test)
+For more instructions on how to run end-to-end testing with the Operand Deployment Lifecycle Manager, see [ODLM guide](https://github.com/IBM/operand-deployment-lifecycle-manager/blob/master/docs/install/common-service-integration.md#end-to-end-test).

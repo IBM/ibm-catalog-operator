@@ -40,6 +40,7 @@ spec:
         clusterhealth.ibm.com/dependencies: "auth-idp, helm-api, helm-repo, platform-api, platform-header"
     spec:
       serviceAccount: ibm-catalog-ui-operand
+      serviceAccountName: ibm-catalog-ui-operand
       terminationGracePeriodSeconds: 60
       hostNetwork: false
       hostPID: false
@@ -61,11 +62,7 @@ spec:
     {{- end }}
       initContainers:
         - name: check-secret
-        {{- if .Values.catalogui.image.sha }}
-          image: "{{ .Values.catalogui.image.imageRegistry }}/{{ .Values.catalogui.image.repository }}@{{ .Values.catalogui.image.sha }}"
-        {{- else }}
-          image: "{{ .Values.catalogui.image.imageRegistry }}/{{ .Values.catalogui.image.repository }}:{{ .Values.catalogui.image.tag }}"
-        {{- end }}
+          image: {{ .Values.catalogui.image.repository }}
           imagePullPolicy: {{ .Values.catalogui.image.pullPolicy }}
           volumeMounts:
             - name: check-file
@@ -76,10 +73,6 @@ spec:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
             runAsNonRoot: true
-            {{- if not (.Capabilities.APIVersions.Has "security.openshift.io/v1") }}
-            runAsUser: {{ .Values.catalogui.runAsUser }}
-            {{- end }}
-            allowPrivilegeEscalation: false
             privileged: false
             capabilities:
               drop:
@@ -93,18 +86,13 @@ spec:
                 sleep 30
               done
       containers:
-      {{- if .Values.catalogui.image.sha }}
-        - image: "{{ .Values.catalogui.image.imageRegistry }}/{{ .Values.catalogui.image.repository }}@{{ .Values.catalogui.image.sha }}"
-      {{- else }}  
-        - image: "{{ .Values.catalogui.image.imageRegistry }}/{{ .Values.catalogui.image.repository }}:{{ .Values.catalogui.image.tag }}"
-      {{- end }}    
+        - name: {{ .Values.catalogui.image.name }}
+          image: {{ .Values.catalogui.image.repository }}
           imagePullPolicy: {{ .Values.catalogui.image.pullPolicy }}
-          name: {{ .Values.catalogui.image.name }}
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
             runAsNonRoot: true
-            allowPrivilegeEscalation: false
             privileged: false
             capabilities:
               drop:
