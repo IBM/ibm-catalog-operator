@@ -16,37 +16,20 @@ images:
     platform:
       os: linux
       arch: s390x
-- image: icp-catalog-ui@sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95
+- image: icp-catalog-ui@sha256:db535688d5853179e9f0c7c8bf7c83553f418025b181478c3509e96c95e7f86d
   references:
-  - repository: icp-catalog-ui@sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95
-    pull-repository: quay.io/opencloudio/icp-catalog-ui@sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95
+  - repository: icp-catalog-ui@sha256:db535688d5853179e9f0c7c8bf7c83553f418025b181478c3509e96c95e7f86d
+    pull-repository: quay.io/opencloudio/icp-catalog-ui@sha256:db535688d5853179e9f0c7c8bf7c83553f418025b181478c3509e96c95e7f86d
     platform:
       os: linux
       arch: amd64
-  - repository: icp-catalog-ui@sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95
-    pull-repository: quay.io/opencloudio/icp-catalog-ui@sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95
+  - repository: icp-catalog-ui@sha256:db535688d5853179e9f0c7c8bf7c83553f418025b181478c3509e96c95e7f86d
+    pull-repository: quay.io/opencloudio/icp-catalog-ui@sha256:db535688d5853179e9f0c7c8bf7c83553f418025b181478c3509e96c95e7f86d
     platform:
       os: linux
       arch: ppc64le
-  - repository: icp-catalog-ui@sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95
-    pull-repository: quay.io/opencloudio/icp-catalog-ui@sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95
-    platform:
-      os: linux
-      arch: s390x
-- image: icp-catalog-ui:3.2.5
-  references:
-  - repository: icp-catalog-ui:3.2.5
-    pull-repository: quay.io/opencloudio/icp-catalog-ui:3.2.5
-    platform:
-      os: linux
-      arch: amd64
-  - repository: icp-catalog-ui:3.2.5
-    pull-repository: quay.io/opencloudio/icp-catalog-ui:3.2.5
-    platform:
-      os: linux
-      arch: ppc64le
-  - repository: icp-catalog-ui:3.2.5
-    pull-repository: quay.io/opencloudio/icp-catalog-ui:3.2.5
+  - repository: icp-catalog-ui@sha256:db535688d5853179e9f0c7c8bf7c83553f418025b181478c3509e96c95e7f86d
+    pull-repository: quay.io/opencloudio/icp-catalog-ui@sha256:db535688d5853179e9f0c7c8bf7c83553f418025b181478c3509e96c95e7f86d
     platform:
       os: linux
       arch: s390x
