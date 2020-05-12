@@ -2,7 +2,9 @@
 
 > **Important:** Do not install this operator directly. Only install this operator using the IBM Common Services Operator. For more information about installing this operator and other Common Services operators, see [Installer documentation](http://ibm.biz/cpcs_opinstall). If you are using this operator as part of an IBM Cloud Pak, see the documentation for that IBM Cloud Pak to learn more about how to install and use the operator service. For more information about IBM Cloud Paks, see [IBM Cloud Paks that use Common Services](http://ibm.biz/cpcs_cloudpaks).
 
-Operator used to manager IBM Catalog UI service. The Catalag UI service provides an user interface for Helm charts management.
+IBM Catalog UI operator provides an user interface for Helm charts management.
+
+For more information about the available IBM Cloud Platform Common Services, see the [IBM Knowledge Center](http://ibm.biz/cpcsdocs).
 
 ## Supported platforms
 
@@ -11,7 +13,7 @@ Red Hat OpenShift Container Platform 4.3 or newer installed on one of the follow
 - Linux x86_64
 - Linux on Power (ppc64le)
 - Linux on IBM Z and LinuxONE
-
+  
 ## Operator versions
 
 - 3.5.0
@@ -40,29 +42,31 @@ For more information about the OpenShift Container Platform Security Context Con
 
 ## Developer guide
 
-Information about building and testing the operator.
+If, as a developer, you are looking to build and test this operator to try out and learn more about the operator and its capabilities, you can use the following developer guide. This guide provides commands for a quick install and initial validation for running the operator.
+
+> **Important:** The following developer guide is provided as-is and only for trial and education purposes. IBM and IBM Support does not provide any support for the usage of the operator with this developer guide. For the official supported install and usage guide for the operator, see the the IBM Knowledge Center documentation for your IBM Cloud Pak or for IBM Cloud Platform Common Services.
 
 ### Quick start guide
 
 Use the following quick start commands for building and testing the operator:
 
-Cloning the operator repository
+#### Cloning the operator repository
 ```
 # git clone git@github.com:IBM/ibm-catalog-ui-operator.git
 # cd ibm-catalog-ui-operator
 ```
 
-Building the operator image
+#### Building the operator image
 ```
 # make build
 ```
 
-Installing the operator 
+#### Installing the operator 
 ```
 # make install
 ```
 
-Uninstalling the operator
+#### Uninstalling the operator
 ```
 # make uninstall
 ```
@@ -71,19 +75,19 @@ Uninstalling the operator
 
 Use the following commands to debug the operator:
 
-Check the Cluster Service Version (CSV) installation status
+#### Check the Cluster Service Version (CSV) installation status
 ```
 # oc get csv
 # oc describe csv ibm-catalog-ui-operator.v3.6.0
 ```
 
-Check the custom resource status
+#### Check the custom resource status
 ```
 # oc describe cataloguis catalog-ui
 # oc get cataloguis catalog-ui -o yaml
 ```
 
-Check the operator status and log
+#### Check the operator status and log
 ```
 # oc describe po -l name=ibm-catalog-ui-operator
 # oc logs -f $(oc get po -l name=ibm-catalog-ui-operator -o name)
