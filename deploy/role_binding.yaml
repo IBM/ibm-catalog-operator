@@ -4,7 +4,7 @@ metadata:
   name: ibm-catalog-ui-operator
   labels:
       name: ibm-catalog-ui-operator
-      app.kubernetes.io/instance: cataloguis.operator.ibm.com
+      app.kubernetes.io/instance: catalog-ui
       app.kubernetes.io/managed-by: cataloguis.operator.ibm.com
       app.kubernetes.io/name: cataloguis.operator.ibm.com
 subjects:
