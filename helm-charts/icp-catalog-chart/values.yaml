@@ -12,7 +12,7 @@ catalogui:
   image:
     name: catalog-ui
     pullPolicy: IfNotPresent
-    repository: quay.io/opencloudio/icp-catalog-ui@sha256:67655d5c3683844acfa3c6fff9196f54284111286506976f29f8c297b6791e95
+    repository: quay.io/opencloudio/icp-catalog-ui@sha256:10bd3c5955edd268f319fdfab5f033da86a040ca9d1bbd68c10a5505cb2ced4c
   ingresspath: /catalog/
   resources:
     limits:
