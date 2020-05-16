@@ -43,7 +43,7 @@ spec:
       containers:
         - name: ibm-catalog-ui-operator
           # Replace this with the built image name
-          image: quay.io/opencloudio/ibm-catalog-ui-operator:latest
+          image: quay.io/opencloudio/ibm-catalog-ui-operator@sha256:fe4285de2be877a971f11c2a0b17997f24d27fb7979927020735f8b0bceeac9e
           imagePullPolicy: Always
           env:
             - name: WATCH_NAMESPACE
