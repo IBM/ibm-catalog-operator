@@ -1,21 +1,39 @@
 images:
-- image: ibm-catalog-ui-operator:3.5.0
+- image: ibm-catalog-ui-operator:3.6.0
   references:
-  - repository: ibm-catalog-ui-operator:3.5.0
-    pull-repository: quay.io/opencloudio/ibm-catalog-ui-operator:3.5.0
+  - repository: ibm-catalog-ui-operator:3.6.0
+    pull-repository: quay.io/opencloudio/ibm-catalog-ui-operator:3.6.0
     platform:
       os: linux
       arch: amd64
-  - repository: ibm-catalog-ui-operator:3.5.0
-    pull-repository: quay.io/opencloudio/ibm-catalog-ui-operator:3.5.0
+  - repository: ibm-catalog-ui-operator:3.6.0
+    pull-repository: quay.io/opencloudio/ibm-catalog-ui-operator:3.6.0
     platform:
       os: linux
       arch: ppc64le
-  - repository: ibm-catalog-ui-operator:3.5.0
-    pull-repository: quay.io/opencloudio/ibm-catalog-ui-operator:3.5.0
+  - repository: ibm-catalog-ui-operator:3.6.0
+    pull-repository: quay.io/opencloudio/ibm-catalog-ui-operator:3.6.0
     platform:
       os: linux
       arch: s390x
+- image: ibm-catalog-ui-operator@sha256:fe4285de2be877a971f11c2a0b17997f24d27fb7979927020735f8b0bceeac9e
+  references:
+  - repository: ibm-catalog-ui-operator@sha256:fe4285de2be877a971f11c2a0b17997f24d27fb7979927020735f8b0bceeac9e
+    pull-repository: quay.io/opencloudio/ibm-catalog-ui-operator@sha256:fe4285de2be877a971f11c2a0b17997f24d27fb7979927020735f8b0bceeac9e
+    platform:
+      os: linux
+      arch: amd64
+  - repository: ibm-catalog-ui-operator@sha256:fe4285de2be877a971f11c2a0b17997f24d27fb7979927020735f8b0bceeac9e
+    pull-repository: quay.io/opencloudio/ibm-catalog-ui-operator@sha256:fe4285de2be877a971f11c2a0b17997f24d27fb7979927020735f8b0bceeac9e
+    platform:
+      os: linux
+      arch: ppc64le
+  - repository: ibm-catalog-ui-operator@sha256:fe4285de2be877a971f11c2a0b17997f24d27fb7979927020735f8b0bceeac9e
+    pull-repository: quay.io/opencloudio/ibm-catalog-ui-operator@sha256:fe4285de2be877a971f11c2a0b17997f24d27fb7979927020735f8b0bceeac9e
+    platform:
+      os: linux
+      arch: s390x
+
 - image: icp-catalog-ui@sha256:10bd3c5955edd268f319fdfab5f033da86a040ca9d1bbd68c10a5505cb2ced4c
   references:
   - repository: icp-catalog-ui@sha256:10bd3c5955edd268f319fdfab5f033da86a040ca9d1bbd68c10a5505cb2ced4c
