@@ -58,7 +58,7 @@ spec:
             - name: OPERATOR_NAME
               value: "ibm-catalog-ui-operator"
             - name: OPERAND_CATALOG_UI_IMAGE
-              value: "quay.io/opencloudio/icp-catalog-ui@sha256:fe4285de2be877a971f11c2a0b17997f24d27fb7979927020735f8b0bceeac9e"
+              value: "quay.io/opencloudio/icp-catalog-ui@sha256:10bd3c5955edd268f319fdfab5f033da86a040ca9d1bbd68c10a5505cb2ced4c"
           resources:
             limits:
               cpu: 150m
