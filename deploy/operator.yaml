@@ -8,7 +8,7 @@ metadata:
       app.kubernetes.io/managed-by: cataloguis.operator.ibm.com
       app.kubernetes.io/name: cataloguis.operator.ibm.com
 spec:
-  # progressDeadlineSeconds: 1200
+  progressDeadlineSeconds: 1800
   replicas: 1
   selector:
     matchLabels:
