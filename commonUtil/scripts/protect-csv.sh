@@ -39,7 +39,7 @@ if [ ! -f "$(command -v yq 2> /dev/null)" ]; then
 fi
 
 DEPLOY_DIR=${DEPLOY_DIR:-deploy}
-OPERATOR_NAME=$(ls "${DEPLOY_DIR}/olm-catalog" | head -1)
+OPERATOR_NAME=$(basename $(find "${DEPLOY_DIR}/olm-catalog" -type d -maxdepth 1 | tail -1 ))
 PACKAGE_FILE=$(find "${DEPLOY_DIR}" -name '*.package.yaml' | head -1)
 
 if [ ! -f "${PACKAGE_FILE}" ]; then
