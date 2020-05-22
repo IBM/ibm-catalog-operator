@@ -32,7 +32,7 @@ DEPLOY_DIR=${DEPLOY_DIR:-deploy}
 BUNDLE_DIR=${BUNDLE_DIR:-deploy/olm-catalog/${OPERATOR_NAME}}
 LAST_CSV_DIR=$(find "${BUNDLE_DIR}" -type d -maxdepth 1 | sort | tail -1)
 LAST_CSV_VERSION=$(basename "${LAST_CSV_DIR}")
-NEW_CSV_DIR=$(echo "${LAST_CSV_DIR}" | sed -e "s/${LAST_CSV_VERSION}/${NEW_CSV_VERSION}/")
+NEW_CSV_DIR=${LAST_CSV_DIR//${LAST_CSV_VERSION}/${NEW_CSV_VERSION}}
 
 PREVIOUS_CSV_DIR=$(find "${BUNDLE_DIR}" -type d -maxdepth 1 | sort | tail -2 | head -1)
 PREVIOUS_CSV_VERSION=$(basename "${PREVIOUS_CSV_DIR}")
@@ -45,19 +45,13 @@ fi
 echo "[INFO] Bumping up CSV version from ${LAST_CSV_VERSION} to ${NEW_CSV_VERSION}"
 cp -rfv "${LAST_CSV_DIR}" "${NEW_CSV_DIR}"
 OLD_CSV_FILE=$(find "${NEW_CSV_DIR}" -type f -name '*.clusterserviceversion.yaml' | head -1)
-NEW_CSV_FILE=$(echo "${OLD_CSV_FILE}" | sed -e "s|${LAST_CSV_VERSION}.clusterserviceversion.yaml|${NEW_CSV_VERSION}.clusterserviceversion.yaml|")
+NEW_CSV_FILE=${OLD_CSV_FILE//${LAST_CSV_VERSION}.clusterserviceversion.yaml/${NEW_CSV_VERSION}.clusterserviceversion.yaml}
 if [ -f "${OLD_CSV_FILE}" ]; then
     mv -v "${OLD_CSV_FILE}" "${NEW_CSV_FILE}"
 fi
 
-PACKAGE_YAML=${BUNDLE_DIR}/${OPERATOR_NAME}.package.yaml
-echo "[INFO] Updating ${PACKAGE_YAML}"
-NEW_VERSION=$(yq r "${NEW_CSV_FILE}" "metadata.name")
-BETA_VERSION=$(yq r "${PACKAGE_YAML}" "channels.(name==beta).currentCSV")
-yq w -i "${PACKAGE_YAML}" "channels.(name==dev).currentCSV" "${NEW_VERSION}" 
-
 echo "[INFO] Updating ${NEW_CSV_FILE}"
-REPLACES_VERSION=$(yq r ${NEW_CSV_FILE} "metadata.name")
+REPLACES_VERSION=$(yq r "${NEW_CSV_FILE}" "metadata.name")
 sed -e "s|name: ${OPERATOR_NAME}\(.*\)${LAST_CSV_VERSION}|name: ${OPERATOR_NAME}\1${NEW_CSV_VERSION}|" -i "${NEW_CSV_FILE}"
 sed -e "s|olm.skipRange: \(.*\)${LAST_CSV_VERSION}\(.*\)|olm.skipRange: \1${NEW_CSV_VERSION}\2|" -i "${NEW_CSV_FILE}"
 sed -e "s|image: \(.*\)${OPERATOR_NAME}\(.*\)|image: \1${OPERATOR_NAME}:latest|" -i "${NEW_CSV_FILE}"
@@ -65,7 +59,10 @@ sed -e "s|containerImage: \(.*\)${OPERATOR_NAME}\(.*\)|containerImage: \1${OPERA
 sed -e "s|replaces: ${OPERATOR_NAME}\(.*\)${PREVIOUS_CSV_VERSION}|replaces: ${REPLACES_VERSION}|" -i "${NEW_CSV_FILE}"
 sed -e "s|version: ${LAST_CSV_VERSION}|version: ${NEW_CSV_VERSION}|" -i "${NEW_CSV_FILE}"
 
-
+PACKAGE_YAML=${BUNDLE_DIR}/${OPERATOR_NAME}.package.yaml
+echo "[INFO] Updating ${PACKAGE_YAML}"
+NEW_VERSION=$(yq r "${NEW_CSV_FILE}" "metadata.name")
+yq w -i "${PACKAGE_YAML}" "channels.(name==dev).currentCSV" "${NEW_VERSION}" 
 
 echo "[INFO] Updating ${DEPLOY_DIR}/operator.yaml"
 sed -e "s|image: \(.*\)${OPERATOR_NAME}\(.*\)|image: \1${OPERATOR_NAME}:latest|" -i "${DEPLOY_DIR}/operator.yaml"
