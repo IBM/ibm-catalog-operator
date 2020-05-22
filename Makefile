@@ -218,6 +218,12 @@ bump-up-csv: ## Bump up CSV version
 	@commonUtil/scripts/bump-up-csv.sh ${BASE_DIR} $(CSV_VERSION)
 
 ############################################################
+# configure githooks
+############################################################
+configure-githooks: ## Configure githooks
+	- git config core.hooksPath .githooks
+
+############################################################
 # clean section
 ############################################################
 clean: ## Clean build binary
