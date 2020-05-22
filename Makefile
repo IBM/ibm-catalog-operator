@@ -31,7 +31,7 @@ NAMESPACE=ibm-common-services
 # Use your own docker registry and image name for dev/test by overridding the IMG and REGISTRY environment variable.
 IMG ?= ibm-catalog-ui-operator
 REGISTRY ?= quay.io/opencloudio
-CSV_VERSION ?= 3.6.0
+CSV_VERSION ?= 3.6.1
 
 QUAY_USERNAME ?=
 QUAY_PASSWORD ?=
@@ -210,6 +210,12 @@ uninstall: ## Uninstall all that all performed in the $ make install
 operatorsource: ## Create opencloud-operators operator source
 	- kubectl delete -f commonUtil/resources/opencloud-operators.yaml
 	- kubectl apply -f commonUtil/resources/opencloud-operators.yaml
+
+############################################################
+# bump up csv section
+############################################################
+bump-up-csv: ## Bump up CSV version
+	@commonUtil/scripts/bump-up-csv.sh ${BASE_DIR} $(CSV_VERSION)
 
 ############################################################
 # clean section
