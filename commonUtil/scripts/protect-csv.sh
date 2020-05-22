@@ -18,7 +18,7 @@ function protect_csv() {
         error "No CSV defined for ${channel} channel"
     fi
 
-    csv_version=$(echo ${csv} | sed -e "s|${operator_name}.v||")
+    csv_version=${csv//${operator_name}.v/}
     # check unstaged changes
     for file in $(git diff --name-only); do
         if [[ "${file}" =~ ^deploy/olm-catalog/${operator_name}/${csv_version}/.* ]]; then
@@ -34,22 +34,22 @@ function protect_csv() {
     done
 }
 
-if [ ! -f "$(which yq 2> /dev/null)" ]; then
+if [ ! -f "$(command -v yq 2> /dev/null)" ]; then
     error "yq command not found"
 fi
 
 DEPLOY_DIR=${DEPLOY_DIR:-deploy}
-OPERATOR_NAME=$(ls ${DEPLOY_DIR}/olm-catalog | head -1)
-PACKAGE_FILE=$(find ${DEPLOY_DIR} -name '*.package.yaml' | head -1)
+OPERATOR_NAME=$(ls "${DEPLOY_DIR}/olm-catalog" | head -1)
+PACKAGE_FILE=$(find "${DEPLOY_DIR}" -name '*.package.yaml' | head -1)
 
 if [ ! -f "${PACKAGE_FILE}" ]; then
     error "Missing package yaml file"
 fi
 
 # protect stable-v1 channel
-STABLE_CSV=$(yq r ${PACKAGE_FILE} "channels.(name==stable-v1).currentCSV")
-protect_csv ${STABLE_CSV} "stable-v1" ${OPERATOR_NAME}
+STABLE_CSV=$(yq r "${PACKAGE_FILE}" "channels.(name==stable-v1).currentCSV")
+protect_csv "${STABLE_CSV}" "stable-v1" "${OPERATOR_NAME}"
 
 # protect beta channel
-BETA_CSV=$(yq r ${PACKAGE_FILE} "channels.(name==beta).currentCSV")
-protect_csv ${BETA_CSV} "beta" ${OPERATOR_NAME}
+BETA_CSV=$(yq r "${PACKAGE_FILE}" "channels.(name==beta).currentCSV")
+protect_csv "${BETA_CSV}" "beta" "${OPERATOR_NAME}"
