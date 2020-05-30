@@ -214,7 +214,7 @@ spec:
                 - name: OPERATOR_NAME
                   value: ibm-catalog-ui-operator
                 - name: OPERAND_CATALOG_UI_IMAGE
-                  value: quay.io/opencloudio/icp-catalog-ui@sha256:10bd3c5955edd268f319fdfab5f033da86a040ca9d1bbd68c10a5505cb2ced4c
+                  value: quay.io/opencloudio/icp-catalog-ui@sha256:dbf31453dbb943a1ddd5a8d72fa89f3136232039f91e990148fdc5a060b75332
                 image: quay.io/opencloudio/ibm-catalog-ui-operator:latest
                 imagePullPolicy: Always
                 name: ibm-catalog-ui-operator
