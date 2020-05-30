@@ -37,17 +37,17 @@ images:
 - image: icp-catalog-ui@sha256:10bd3c5955edd268f319fdfab5f033da86a040ca9d1bbd68c10a5505cb2ced4c
   references:
   - repository: icp-catalog-ui@sha256:10bd3c5955edd268f319fdfab5f033da86a040ca9d1bbd68c10a5505cb2ced4c
-    pull-repository: quay.io/opencloudio/icp-catalog-ui@sha256:10bd3c5955edd268f319fdfab5f033da86a040ca9d1bbd68c10a5505cb2ced4c
+    pull-repository: quay.io/opencloudio/icp-catalog-ui@sha256:dbf31453dbb943a1ddd5a8d72fa89f3136232039f91e990148fdc5a060b75332
     platform:
       os: linux
       arch: amd64
   - repository: icp-catalog-ui@sha256:10bd3c5955edd268f319fdfab5f033da86a040ca9d1bbd68c10a5505cb2ced4c
-    pull-repository: quay.io/opencloudio/icp-catalog-ui@sha256:10bd3c5955edd268f319fdfab5f033da86a040ca9d1bbd68c10a5505cb2ced4c
+    pull-repository: quay.io/opencloudio/icp-catalog-ui@sha256:dbf31453dbb943a1ddd5a8d72fa89f3136232039f91e990148fdc5a060b75332
     platform:
       os: linux
       arch: ppc64le
   - repository: icp-catalog-ui@sha256:10bd3c5955edd268f319fdfab5f033da86a040ca9d1bbd68c10a5505cb2ced4c
-    pull-repository: quay.io/opencloudio/icp-catalog-ui@sha256:10bd3c5955edd268f319fdfab5f033da86a040ca9d1bbd68c10a5505cb2ced4c
+    pull-repository: quay.io/opencloudio/icp-catalog-ui@sha256:dbf31453dbb943a1ddd5a8d72fa89f3136232039f91e990148fdc5a060b75332
     platform:
       os: linux
       arch: s390x
