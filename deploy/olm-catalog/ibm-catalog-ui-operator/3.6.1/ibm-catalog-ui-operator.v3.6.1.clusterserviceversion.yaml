@@ -69,7 +69,7 @@ metadata:
     capabilities: Seamless Upgrades
     categories: Developer Tools
     certified: "false"
-    containerImage: quay.io/opencloudio/ibm-catalog-ui-operator:latest
+    containerImage: quay.io/opencloudio/ibm-catalog-ui-operator@sha256:11088f8bef7cdc71a304656c9c3180c1070b8cc543c990fc5e4d18bd1ab8ec93
     createdAt: "2020-05-16"
     description: CatalogUI provides Catalog UI service for Helm charts management.
     olm.skipRange: ">=3.5.0 <3.6.1"
@@ -215,7 +215,7 @@ spec:
                   value: ibm-catalog-ui-operator
                 - name: OPERAND_CATALOG_UI_IMAGE
                   value: quay.io/opencloudio/icp-catalog-ui@sha256:dbf31453dbb943a1ddd5a8d72fa89f3136232039f91e990148fdc5a060b75332
-                image: quay.io/opencloudio/ibm-catalog-ui-operator:latest
+                image: quay.io/opencloudio/ibm-catalog-ui-operator@sha256:11088f8bef7cdc71a304656c9c3180c1070b8cc543c990fc5e4d18bd1ab8ec93
                 imagePullPolicy: Always
                 name: ibm-catalog-ui-operator
                 resources:
