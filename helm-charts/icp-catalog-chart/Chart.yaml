@@ -19,4 +19,4 @@ keywords:
 kubeVersion: '>=1.10.0'
 tillerVersion: '>=2.16.1'
 name: icp-catalog-chart
-version: 3.6.1
+version: 3.6.2

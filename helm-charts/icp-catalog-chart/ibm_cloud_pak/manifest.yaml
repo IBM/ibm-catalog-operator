@@ -1,18 +1,18 @@
 images:
-- image: ibm-catalog-ui-operator:3.6.1
+- image: ibm-catalog-ui-operator:3.6.2
   references:
-  - repository: ibm-catalog-ui-operator:3.6.1
-    pull-repository: quay.io/opencloudio/ibm-catalog-ui-operator:3.6.1
+  - repository: ibm-catalog-ui-operator:3.6.2
+    pull-repository: quay.io/opencloudio/ibm-catalog-ui-operator:3.6.2
     platform:
       os: linux
       arch: amd64
-  - repository: ibm-catalog-ui-operator:3.6.1
-    pull-repository: quay.io/opencloudio/ibm-catalog-ui-operator:3.6.1
+  - repository: ibm-catalog-ui-operator:3.6.2
+    pull-repository: quay.io/opencloudio/ibm-catalog-ui-operator:3.6.2
     platform:
       os: linux
       arch: ppc64le
-  - repository: ibm-catalog-ui-operator:3.6.1
-    pull-repository: quay.io/opencloudio/ibm-catalog-ui-operator:3.6.1
+  - repository: ibm-catalog-ui-operator:3.6.2
+    pull-repository: quay.io/opencloudio/ibm-catalog-ui-operator:3.6.2
     platform:
       os: linux
       arch: s390x
