@@ -8,6 +8,9 @@ metadata:
           "apiVersion": "operator.ibm.com/v1alpha1",
           "kind": "CatalogUI",
           "metadata": {
+            "annotations": {
+              "helm.operator-sdk/upgrade-force": "True"
+            },
             "labels": {
               "app.kubernetes.io/instance": "catalog-ui",
               "app.kubernetes.io/managed-by": "cataloguis.operator.ibm.com",
