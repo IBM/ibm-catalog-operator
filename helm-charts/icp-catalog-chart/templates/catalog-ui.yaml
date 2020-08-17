@@ -21,7 +21,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ .Values.catalogui.commonname  }}
+        app: {{ .Values.catalogui.commonname }}
         app.kubernetes.io/instance: "{{ .Release.Name }}"
         chart: "{{ .Chart.Name }}"
         component: "catalogui"
@@ -55,6 +55,15 @@ spec:
                   - amd64
                   - ppc64le
                   - s390x
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - {{ .Values.catalogui.commonname }}
+            topologyKey: "kubernetes.io/hostname"
     {{- if .Values.catalogui.tolerations }}
       tolerations:
 {{ toYaml .Values.catalogui.tolerations | indent 8 }}
