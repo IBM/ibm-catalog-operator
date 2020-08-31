@@ -72,6 +72,11 @@ metadata:
     olm.skipRange: '>=3.5.0 <3.6.3'
     repository: https://github.com/IBM/ibm-catalog-ui-operator
     support: IBM
+  labels:
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
   name: ibm-catalog-ui-operator.v3.6.3
   namespace: ibm-common-services
 spec:
