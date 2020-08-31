@@ -18,4 +18,4 @@ For the most up-to-date IBM Multicloud Manager user documentation, see [IBM Mult
 ## Version History
 | Chart | Date | Kubernetes Required | Image(s) Supported | Breaking Changes | Details |
 | ----- | ---- | ------------------- | ------------------ | ---------------- | ------- |
-| 3.4.0 | Nov 2019 | >=1.10.0 | | none | Initial Cloudpak Certified Chart release |
+| 3.4.0 | Nov 2019 | >=1.11.0-0 | | none | Initial Cloudpak Certified Chart release |
