@@ -3,20 +3,20 @@ appVersion: 4.1.0.0-000000
 description: Used to deploy Catalog UI microservice into K8s cluster
 icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png
 keywords:
-- mcm
-- ui
-- s390x
-- ppc64le
-- amd64
-- Commercial
-- framework
-- ICP
-- ICPRHOCP
-- ICPROKS
-- IKS
-- RHOCP
-- IcpClusterResource
+  - mcm
+  - ui
+  - s390x
+  - ppc64le
+  - amd64
+  - Commercial
+  - framework
+  - ICP
+  - ICPRHOCP
+  - ICPROKS
+  - IKS
+  - RHOCP
+  - IcpClusterResource
 kubeVersion: '>=1.10.0'
 tillerVersion: '>=2.16.1'
 name: icp-catalog-chart
-version: 3.6.2
+version: 3.6.3
