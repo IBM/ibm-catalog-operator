@@ -22,7 +22,6 @@ spec:
     metadata:
       labels:
         app: {{ .Values.catalogui.commonname }}
-        app.kubernetes.io/instance: "{{ .Release.Name }}"
         chart: "{{ .Chart.Name }}"
         component: "catalogui"
         release: {{ .Release.Name }}
