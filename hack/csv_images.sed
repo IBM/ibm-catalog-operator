@@ -1,2 +1,2 @@
 s|quay.io/opencloudio/ibm-catalog-ui-operator:latest|quay.io/opencloudio/ibm-catalog-ui-operator:dev|g
-s|quay.io/opencloudio/icp-catalog-ui.*|hyc-cloud-private-integration-docker-local.artifactory.swg-devops.com/ibmcom/icp-catalog-ui:3.2.7|g
+s|quay.io/opencloudio/icp-catalog-ui.*|hyc-cloud-private-integration-docker-local.artifactory.swg-devops.com/ibmcom/icp-catalog-ui:3.2.8|g

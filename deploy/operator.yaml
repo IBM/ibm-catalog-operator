@@ -59,10 +59,10 @@ spec:
               value: "quay.io/opencloudio/icp-catalog-ui@sha256:442ea9756d6cc98fafda91b092215decab8c5e0ec73349b9cbe618b33640b900"
           resources:
             limits:
-              cpu: 150m
+              cpu: 50m
               memory: 256Mi
             requests:
-              cpu: 150m
+              cpu: 20m
               memory: 256Mi
           securityContext:
             allowPrivilegeEscalation: false
