@@ -31,7 +31,7 @@ NAMESPACE=ibm-common-services
 # Use your own docker registry and image name for dev/test by overridding the IMG and REGISTRY environment variable.
 IMG ?= ibm-catalog-ui-operator
 REGISTRY ?= "hyc-cloud-private-integration-docker-local.artifactory.swg-devops.com/ibmcom"
-CSV_VERSION ?= 3.6.3
+CSV_VERSION ?= 3.6.4
 
 QUAY_USERNAME ?=
 QUAY_PASSWORD ?=
@@ -237,7 +237,7 @@ configure-githooks: ## Configure githooks
 # clean section
 ############################################################
 clean: ## Clean build binary
-	@docker images | grep "${REGISTRY}/${IMG}" | tr -s ' ' | awk -F' ' '{print $$3}' | xargs -I {} docker rmi {}
+	@docker images | grep "${REGISTRY}/${IMG}" | tr -s ' ' | awk -F' ' '{print $$3}' | xargs -I {} docker rmi -f {}
 	@rm -f build/_output/bin/$(IMG)
 
 ############################################################
