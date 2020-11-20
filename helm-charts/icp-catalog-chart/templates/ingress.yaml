@@ -15,6 +15,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "ibm-icp-management"
     icp.management.ibm.com/auth-type: "id-token"
+    icp.management.ibm.com/configuration-snippet: "\n\t\tport_in_redirect off;"
 spec:
   rules:
   - http:
